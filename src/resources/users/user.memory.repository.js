@@ -5,7 +5,7 @@ const getAll = async () => dataBase.users;
 
 const getById = async (id) => dataBase.users.find((elment) => elment.id === id);
 
-const create = async ({name , login , password }) => {
+const create = async ({name , login , password}) => {
   if (dataBase.users.find((elment) => elment.login === login)) {
     return undefined;
   }
@@ -14,7 +14,7 @@ const create = async ({name , login , password }) => {
   return user;
 };
 
-const update = async ({id, name , login, password }) => {
+const update = async ({id, name , login, password}) => {
   const findedUserIndex = dataBase.users.findIndex((elment) => elment.id === id);
   if (findedUserIndex !== -1) {
   const updatedUser = {...dataBase.users[findedUserIndex], name, login, password };

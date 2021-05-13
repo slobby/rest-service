@@ -5,8 +5,8 @@ const Task = require("../tasks/task.model");
 
 const dataBase = {
     users : [],
-    board : [], 
-    column : [],
+    boards : [], 
+    columns : [],
     tasks : []
 }
 
@@ -27,8 +27,8 @@ const seedDb = (db) => {
     const task4 = new Task({title : 'task4', order : 0, description : 'ty ipsum Lorem jo ', userId : user4.id, boardId : board2.id, columnId : column3.id});
 
     db.users.push(user1, user2, user3, user4);
-    db.board.push(board2, board2); 
-    db.column.push(column1, column2, column3, column4);
+    db.boards.push(board2, board2); 
+    db.columns.push(column1, column2, column3, column4);
     db.tasks.push(task1, task2, task3, task4);
 }
 

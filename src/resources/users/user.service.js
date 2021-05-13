@@ -11,7 +11,7 @@ const getById = async (id) => {
   if (user) {
     return User.toResponse(user);
   }
-  return user;
+  return undefined;
 }
 
 const create = async ({name, login, password}) => {
@@ -19,7 +19,7 @@ const create = async ({name, login, password}) => {
   if (user) {
     return User.toResponse(user);
   }
-  return user;
+  return undefined;
 }
 
 const update = async ({id, name, login, password}) => {
@@ -27,7 +27,7 @@ const update = async ({id, name, login, password}) => {
   if (user) {
     return User.toResponse(user);
   }
-  return user;
+  return undefined;
 }
 
 const deletById = async (id) => {
@@ -35,7 +35,7 @@ const deletById = async (id) => {
   if (user) {
     return User.toResponse(user);
   }
-  return user;
+  return undefined;
 }
 
 module.exports = { getAll, getById, create, update, deletById };
