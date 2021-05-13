@@ -5,7 +5,7 @@ const getAll = async (boardId) => dataBase.tasks.filter((element) =>
   element.boardId === boardId
 );
 
-const getById = async ({boardId, id}) => dataBase.tasks.find((elment) => 
+const getById = async ({boardId, id}) => dataBase.tasks.find((elment) =>
    elment.id === id && elment.boardId === boardId
 );
 
@@ -34,6 +34,7 @@ const update = async ({id, title, order, description, userId, boardId, columnId}
 };
 
 const deletById = async ({boardId, id}) => {
+  
   const findedTaskIndex = dataBase.tasks.findIndex((elment) =>
   elment.id === id && elment.boardId === boardId);
   if (findedTaskIndex !== -1) {

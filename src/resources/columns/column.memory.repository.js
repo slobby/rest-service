@@ -1,5 +1,4 @@
 const dataBase = require("../db/db");
-// const tasksRepo = require('../tasks/task.memory.repository');
 const Column = require('./column.model');
 
 const getAll = async () => dataBase.columns;
@@ -26,13 +25,11 @@ const deletById = async (id) => {
   const findedColumnIndex = dataBase.columns.findIndex((elment) => elment.id === id);
   if (findedColumnIndex !== -1) {
   /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["element"] }] */
-  // переписать
   dataBase.tasks.forEach((element) => {
     if (element.columnId === id) {
       element.columnId = null;
     }
   });
-  // переписать
   const deletedColumn = dataBase.columns.splice(findedColumnIndex, 1)
   return deletedColumn;
   }
