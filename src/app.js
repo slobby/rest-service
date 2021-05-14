@@ -1,4 +1,5 @@
 const express = require('express');
+const createError = require('http-errors');
 const swaggerUI = require('swagger-ui-express');
 const path = require('path');
 const YAML = require('yamljs');
@@ -24,6 +25,21 @@ app.use('/', (req, res, next) => {
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 app.use('/boards/:boardId/tasks', taskRouter);
+
+app.use((req, res, next) => {
+  next(createError(404, 'Not found'));
+});
+
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.send({
+    error: {
+      status: err.status || 500,
+      message: err.message || 'Internal Server Error'
+    }
+  });
+});
 
 
 module.exports = app;
