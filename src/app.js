@@ -1,5 +1,7 @@
 const express = require('express');
 const createError = require('http-errors');
+const fs = require('fs');
+const logger = require('morgan');
 const swaggerUI = require('swagger-ui-express');
 const path = require('path');
 const YAML = require('yamljs');
@@ -9,6 +11,18 @@ const taskRouter = require('./resources/tasks/task.router');
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
+
+if(app.get("env") === "production") {
+
+  const accessLogStream = fs.createWriteStream(path.join(
+    __dirname,
+    '../log/',
+    'access.log'), {flags: 'a'});
+  app.use(logger('combined', {stream: accessLogStream}));
+}
+else {
+  app.use(logger("dev"));
+}
 
 app.use(express.json());
 
