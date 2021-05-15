@@ -1,10 +1,10 @@
+const {StatusCodes} = require('http-status-codes');
 const tasksService = require('./task.service');
-const statusCodes = require('../../common/constants');
 
 const getAll = async (req, res) => {
   const {boardId} = req.params;
   const tasks = await tasksService.getAll(boardId);
-  res.status(statusCodes.OK).json(tasks);
+  res.status(StatusCodes.OK).json(tasks);
 };
 
 const create = async (req, res) => {
@@ -12,10 +12,10 @@ const create = async (req, res) => {
   const {title, order, description, userId, columnId} = req.body;
   const task = await tasksService.create({title, order, description, userId, boardId, columnId});
   if (task) {
-    res.status(statusCodes.CREATED).json(task);
+    res.status(StatusCodes.CREATED).json(task);
   }
   else {
-  res.status(statusCodes.BAD_REQUEST).send('Couldn`t create task.');
+  res.status(StatusCodes.BAD_REQUEST).send('Couldn`t create task.');
   }
 };
 
@@ -23,10 +23,10 @@ const getById = async (req, res) => {
   const {boardId, taskId:id} = req.params;
   const task = await tasksService.getById({boardId, id});
   if (task) {
-    res.status(statusCodes.OK).json(task);
+    res.status(StatusCodes.OK).json(task);
   }
   else {
-  res.status(statusCodes.NOT_FOUND).send('Not found.');
+  res.status(StatusCodes.NOT_FOUND).send('Not found.');
   }
 };
 
@@ -35,10 +35,10 @@ const update = async (req, res) => {
   const { title=undefined, order=undefined, description=undefined, userId=null, boardId=null, columnId=null } = req.body;
   const task = await tasksService.update({id, title, order, description, userId, boardId, columnId});
   if (task) {
-    res.status(statusCodes.OK).json(task);
+    res.status(StatusCodes.OK).json(task);
   }
   else {
-  res.status(statusCodes.NOT_FOUND).send('Bad request.');
+  res.status(StatusCodes.NOT_FOUND).send('Bad request.');
   }
 };
 
@@ -46,10 +46,10 @@ const deletById = async (req, res) => {
   const {boardId, taskId:id} = req.params;
   const task = await tasksService.deletById({boardId, id});
   if (task) {
-    res.status(statusCodes.NO_CONTENT).json(task);
+    res.status(StatusCodes.NO_CONTENT).json(task);
   }
   else {
-  res.status(statusCodes.NOT_FOUND).send('Not found.');
+  res.status(StatusCodes.NOT_FOUND).send('Not found.');
   }
 };
 
