@@ -11,48 +11,76 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const create = async (req, res) => {
-  const {name, login, password} = req.body;
-  const user = await usersService.create({name, login, password});
-  if (user) {
-    res.status(StatusCodes.CREATED).json(user);
-  }
-  else {
-  res.status(StatusCodes.BAD_REQUEST).send('Couldn`t create user.');
-  }
-};
-
-const getById = async (req, res) => {
-  const id = req.params.userId;
-  const user = await usersService.getById(id);
-  if (user) {
-    res.status(StatusCodes.OK).json(user);
-  }
-  else {
-  res.status(StatusCodes.NOT_FOUND).send('Not found.');
+const create = async (req, res, next) => {
+  try {
+    const {name, login, password} = req.body;
+    if (!name || !login || !password) {
+      throw createError.BadRequest('Received not all fields for user.');
+    }
+    const user = await usersService.create({name, login, password});
+    if (user) {
+      res.status(StatusCodes.CREATED).json(user);
+    }
+    else {
+      throw createError.InternalServerError('Couldn`t create user.');
+    }
+  } catch (error) {
+    next(error);
   }
 };
 
-const update = async (req, res) => {
-  const id = req.params.userId;
-  const { name, login, passowrd } = req.body;
-  const user = await usersService.update({id, name, login, passowrd});
-  if (user) {
-    res.status(StatusCodes.OK).json(user);
-  }
-  else {
-  res.status(StatusCodes.NOT_FOUND).send('Bad request.');
+const getById = async (req, res, next) => {
+  try {
+    const id = req.params.userId;
+    if (!id) {
+      throw createError.BadRequest('Don`t receive user id.');
+    }
+    const user = await usersService.getById(id);
+    if (user) {
+      res.status(StatusCodes.OK).json(user);
+    }
+    else {
+      throw createError.NotFound('Not found.');
+    }
+  } catch (error) {
+    next(error);
   }
 };
 
-const deletById = async (req, res) => {
-  const id = req.params.userId;
-  const user = await usersService.deletById(id);
-  if (user) {
-    res.status(StatusCodes.NO_CONTENT).json(user);
+const update = async (req, res, next) => {
+  try {
+    const id = req.params.userId;
+    const { name, login, password } = req.body;
+    if (!id || !name || !login || !password ) {
+      throw createError.BadRequest('Received not all fields for user.');
+    }
+    const user = await usersService.update({id, name, login, password});
+    if (user) {
+      res.status(StatusCodes.OK).json(user);
+    }
+    else {
+      throw createError.NotFound('Not found.');
+    }
+  } catch (error) {
+    next(error);
   }
-  else {
-  res.status(StatusCodes.NOT_FOUND).send('Not found.');
+};
+
+const deletById = async (req, res,next) => {
+  try {
+    const id = req.params.userId;
+    if (!id) {
+      throw createError.BadRequest('Don`t receive user id.');
+    }
+    const user = await usersService.deletById(id);
+    if (user) {
+      res.status(StatusCodes.NO_CONTENT).json(user);
+    }
+    else {
+      throw createError.NotFound('Not found.');
+    }
+  } catch (error) {
+    next(error);
   }
 };
 
