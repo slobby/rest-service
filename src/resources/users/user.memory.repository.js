@@ -27,10 +27,10 @@ const update = async ({id, name , login, password}) => {
 const deletById = async (id) => {
   const findedUserIndex = dataBase.users.findIndex((elment) => elment.id === id);
   if (findedUserIndex !== -1) {
-  /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["element"] }] */
   dataBase.tasks.forEach((element) => {
-    if (element.userId === id) {
-      element.userId = null;
+    const localElement = element;
+    if (localElement.userId === id) {
+      localElement.userId = null;
     }
   });
   const deletedUser = dataBase.users.splice(findedUserIndex, 1)

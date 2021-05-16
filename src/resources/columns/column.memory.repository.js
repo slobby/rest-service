@@ -24,10 +24,10 @@ const update = async ({id, title , order}) => {
 const deletById = async (id) => {
   const findedColumnIndex = dataBase.columns.findIndex((elment) => elment.id === id);
   if (findedColumnIndex !== -1) {
-  /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["element"] }] */
   dataBase.tasks.forEach((element) => {
-    if (element.columnId === id) {
-      element.columnId = null;
+    const localElement = element;
+    if (localElement.columnId === id) {
+      localElement.columnId = null;
     }
   });
   const deletedColumn = dataBase.columns.splice(findedColumnIndex, 1)
