@@ -41,7 +41,7 @@ const getById = async (id) =>
 /**
  * Create the column
  * @async
- * @param {import('./column.model').createColumn} createColumn Parameters for creating column instance
+ * @param {createColumn} createColumn Parameters for creating column instance
  * @returns {Promise<Column>} Created column
  */
 const create = async ({ title, order }) => {

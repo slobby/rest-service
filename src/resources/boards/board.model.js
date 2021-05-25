@@ -1,6 +1,6 @@
 /**
  * Board model
- * @module board:model
+ * @module board-model
  */
 
 const uuid = require('uuid').v4;
