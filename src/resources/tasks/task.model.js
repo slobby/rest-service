@@ -1,13 +1,13 @@
 /**
  * Task model
- * @module task:model
+ * @module task-model
  */
 
 const uuid = require('uuid').v4;
 
 /**
  * createTask type definition
- * @typedef {Object} createBoard      Contains parameters for creating task instance
+ * @typedef {Object} createTask       Contains parameters for creating task instance
  * @property {string} [id]            Unique task id
  * @property {string} title           Task title
  * @property {string} order           Task order
@@ -19,7 +19,7 @@ const uuid = require('uuid').v4;
 
 /**
  * viewTask type definition
- * @typedef {Object} viewBoard        Contains task`s parameters for responce
+ * @typedef {Object} viewTask         Contains task`s parameters for responce
  * @property {string} [id]            Unique task id
  * @property {string} title           Task title
  * @property {string} order           Task order
@@ -57,7 +57,7 @@ class Task {
    * Return a representing of task for response
    * @static
    * @param {Task} task a task
-   * @returns {viewBoard} task`s parameters for responce
+   * @returns {viewTask} task`s parameters for responce
    */
   static toResponse(task) {
     const { id, title, order, description, userId, boardId, columnId } = task;
