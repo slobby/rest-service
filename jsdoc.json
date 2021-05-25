@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["src\\resources"],
+    "include": ["src\\resources\\columns"],
     "includePattern": ".+\\.js$"
   },
   "opts": {
