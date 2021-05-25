@@ -30,7 +30,7 @@ const getAll = async (boardId) =>
  * Find the task by Id
  * @async
  * @param {string} id The Id of task
- * @returns {Promise<Task>|undefined} The task if success, or undefinded otherwise
+ * @returns {Promise<Task|undefined>} The task if success, or undefinded otherwise
  */
 const getById = async ({ boardId, id }) =>
   dataBase.tasks.find(
@@ -38,7 +38,7 @@ const getById = async ({ boardId, id }) =>
   );
 
 /**
- * Create the task
+ * Create the new task
  * @async
  * @param {createTask} createTask Parameters for creating task instance
  * @returns {Promise<Task>} Created task

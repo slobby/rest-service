@@ -33,13 +33,13 @@ const getAll = async () => dataBase.columns;
  * Find the column by Id
  * @async
  * @param {string} id The Id of column
- * @returns {Promise<Column>|undefined} The column if success, or undefinded otherwise
+ * @returns {Promise<Column|undefined>} The column if success, or undefinded otherwise
  */
 const getById = async (id) =>
   dataBase.columns.find((elment) => elment.id === id);
 
 /**
- * Create the column
+ * Create the new column
  * @async
  * @param {createColumn} createColumn Parameters for creating column instance
  * @returns {Promise<Column>} Created column

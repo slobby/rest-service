@@ -36,13 +36,13 @@ const getAll = async () => dataBase.boards;
  * Find the board by Id
  * @async
  * @param {string} id The Id of board
- * @returns {Promise<Board>|undefined} The board if success, or undefinded otherwise
+ * @returns {Promise<Board|undefined>} The board if success, or undefinded otherwise
  */
 const getById = async (id) =>
   dataBase.boards.find((elment) => elment.id === id);
 
 /**
- * Create the board
+ * Create the new board
  * @async
  * @param {createBoard} createColumn Parameters for creating board instance
  * @returns {Promise<Board>} Created board

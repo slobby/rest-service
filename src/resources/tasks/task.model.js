@@ -7,6 +7,7 @@ const uuid = require('uuid').v4;
 
 /**
  * createTask type definition
+ * @global
  * @typedef {Object} createTask       Contains parameters for creating task instance
  * @property {string} [id]            Unique task id
  * @property {string} title           Task title
@@ -19,6 +20,7 @@ const uuid = require('uuid').v4;
 
 /**
  * viewTask type definition
+ * @global
  * @typedef {Object} viewTask         Contains task`s parameters for responce
  * @property {string} [id]            Unique task id
  * @property {string} title           Task title
@@ -29,7 +31,9 @@ const uuid = require('uuid').v4;
  * @property {number} columnId        Task owner column userId
  */
 
-/** Class representing a task. */
+/** Class representing a task.
+ * @global
+ */
 class Task {
   /**
    * Create a task.

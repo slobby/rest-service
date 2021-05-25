@@ -9,7 +9,7 @@ This is an Express application, the application implements REST API.
 ## Downloading
 
 ```
-git clone https://github.com/slobby/rest-service.git -b API
+git clone https://github.com/slobby/rest-service.git -b jsdoc-typescript
 ```
 
 ## Installing NPM modules
@@ -48,6 +48,12 @@ npm test <suite name>
 
 ```
 npm run lint
+```
+
+### Create jsDoc html files
+
+```
+npm run doc
 ```
 
 ### Debugging in VSCode

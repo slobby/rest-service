@@ -7,13 +7,16 @@ const uuid = require('uuid').v4;
 
 /**
  * createColumn type definition
+ * @global
  * @typedef {Object} createColumn Contains parameters for creating column instance
  * @property {string} [id]        Unique column id
  * @property {string} title       Column title
  * @property {number} order       Column order
  */
 
-/** Class representing a column. */
+/** Class representing a column.
+ * @global
+ */
 class Column {
   /**
    * Create a column.
