@@ -1,12 +1,14 @@
 import { dataBase } from '../db/db';
 import { User } from './user.model';
+import { Task } from '../tasks/task.model';
+
 import {
   createUser,
   viewUser,
   updateUser,
 } from '../../interfaces/userInterfaces';
 
-export const getAll = async (): Promise<User[]> => dataBase.users;
+export const getAll = async (): Promise<Array<User>> => dataBase.users;
 
 export const getById = async (id: string): Promise<User | undefined> =>
   dataBase.users.find((elment: User) => elment.id === id);
@@ -16,10 +18,10 @@ export const create = async ({
   login,
   password,
 }: createUser): Promise<User | undefined> => {
-  if (dataBase.users.find((elment) => elment.login === login)) {
+  if (dataBase.users.find((elment: User) => elment.login === login)) {
     return undefined;
   }
-  const user = new User({ name, login, password });
+  const user: User = new User({ name, login, password });
   dataBase.users.push(user);
   return user;
 };
@@ -30,36 +32,25 @@ export const update = async ({
   login,
   password,
 }: updateUser): Promise<User | undefined> => {
-  const findedUserIndex = dataBase.users.findIndex(
-    (elment) => elment.id === id
+  const findedUserIndex: number = dataBase.users.findIndex(
+    (elment: User) => elment.id === id
   );
   if (findedUserIndex !== -1) {
-    const 
-    dataBase.users[findedUserIndex].name = name;
-    const updatedUser: updateUser = {
-      ...dataBase.users[findedUserIndex],
-      id,
-      name,
-      login,
-      password,
-    };
-    dataBase.users.splice(findedUserIndex, 1, updatedUser);
-    return updatedUser;
+    const foundedUser: User = <User>dataBase.users[findedUserIndex];
+    foundedUser.name = name;
+    foundedUser.login = login;
+    foundedUser.password = password;
+    return foundedUser;
   }
   return undefined;
 };
 
-/**
- * Delete the user by Id
- * @param {string} id The Id of user
- * @returns {Promise<User|undefined>} Deleted user if success, or undefinded otherwise
- */
-export const deletById = async (id): Promise<User | undefined> => {
-  const findedUserIndex = dataBase.users.findIndex(
-    (elment) => elment.id === id
+export const deletById = async (id: string): Promise<User | undefined> => {
+  const findedUserIndex: number = dataBase.users.findIndex(
+    (elment: User) => elment.id === id
   );
   if (findedUserIndex !== -1) {
-    dataBase.tasks.forEach((element) => {
+    dataBase.tasks.forEach((element: Task) => {
       const localElement = element;
       if (localElement.userId === id) {
         localElement.userId = null;

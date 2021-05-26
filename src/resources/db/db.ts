@@ -4,15 +4,15 @@ import { Column } from '../columns/column.model';
 import { Task } from '../tasks/task.model';
 
 export interface IDB {
-  users: User[];
-  boards: Board[];
-  columns: Column[];
-  tasks: Task[];
+  users: Array<User>;
+  boards: Array<Board>;
+  columns: Array<Column>;
+  tasks: Array<Task>;
 }
 
 export const dataBase: IDB = {
-  users: [],
-  boards: [],
-  columns: [],
-  tasks: [],
+  users: new Array<User>(),
+  boards: new Array<Board>(),
+  columns: new Array<Column>(),
+  tasks: new Array<Task>(),
 };

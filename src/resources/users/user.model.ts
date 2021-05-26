@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import { createUser, viewUser, IModel } from '../../interfaces/userInterfaces';
+import { createUser, viewUser } from '../../interfaces/userInterfaces';
+import { IModel } from '../../interfaces/interfaces';
 
 export class User implements IModel<viewUser> {
   id: string;

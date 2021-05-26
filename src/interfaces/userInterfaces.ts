@@ -1,7 +1,3 @@
-export interface IModel<T> {
-  toResponse(): T;
-}
-
 export type createUser = {
   name: string;
   login: string;
