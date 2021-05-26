@@ -8,6 +8,7 @@ const Task = require('./task.model');
 
 /**
  * createTask type definition
+ * @ignore
  * @typedef {Object} createTask       Contains parameters for creating task instance
  * @property {string} [id]            Unique task id
  * @property {string} title           Task title

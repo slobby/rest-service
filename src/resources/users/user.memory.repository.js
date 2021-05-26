@@ -8,6 +8,7 @@ const User = require('./user.model');
 
 /**
  * createUser type definition
+ * @ignore
  * @typedef {Object} createUser Contains parameters for creating user instance
  * @property {string} [id]      Unique user id
  * @property {string} name      User name

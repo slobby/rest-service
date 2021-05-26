@@ -11,6 +11,7 @@ const tasksRepo = require('../tasks/task.memory.repository');
 
 /**
  * createBoard type definition
+ * @ignore
  * @typedef {Object} createBoard      Contains parameters for creating board instance
  * @property {string} [id]            Unique board id
  * @property {string} title           Board title
@@ -19,6 +20,7 @@ const tasksRepo = require('../tasks/task.memory.repository');
 
 /**
  * updateBoard type definition
+ * @ignore
  * @typedef {Object} updateBoard      Contains parameters for creating board instance
  * @property {string} id              Unique board id
  * @property {string} title           Board title

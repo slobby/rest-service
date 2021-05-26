@@ -8,6 +8,7 @@ const Column = require('./column.model');
 
 /**
  * createColumn type definition
+ * @ignore
  * @typedef {Object} createColumn Contains parameters for creating column instance
  * @property {string} [id]        Unique column id
  * @property {string} title       Column title
@@ -16,6 +17,7 @@ const Column = require('./column.model');
 
 /**
  * updateColumn type definition
+ * @ignore
  * @typedef {Object} updateColumn Contains parameters for updating column instance
  * @property {string} id          Unique column id
  * @property {string} title       Column title
