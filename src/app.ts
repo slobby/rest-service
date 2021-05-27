@@ -6,9 +6,9 @@ import logger from 'morgan';
 import swaggerUI from 'swagger-ui-express';
 import path from 'path';
 import YAML from 'yamljs';
-// import userRouter from './resources/users/user.router';
-// import boardRouter from './resources/boards/board.router';
-// import taskRouter from './resources/tasks/task.router';
+import userRouter from './resources/users/user.router';
+import boardRouter from './resources/boards/board.router';
+import taskRouter from './resources/tasks/task.router';
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -39,21 +39,34 @@ app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 app.use('/boards/:boardId/tasks', taskRouter);
 
-app.use((req, res, next) => {
-  next(createError(404, 'Not found'));
-});
-
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.send({
-    error: {
-      status: err.status || 500,
-      message: err.message || 'Internal Server Error',
-    },
-  });
-  if (!err) {
-    next(err);
+app.use(
+  (
+    _req: express.Request,
+    _res: express.Response,
+    next: express.NextFunction
+  ) => {
+    next(createError(404, 'Not found'));
   }
-});
+);
 
-module.exports = app;
+app.use(
+  (
+    err: createError.HttpError,
+    _req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.status(err.status || 500);
+    res.send({
+      error: {
+        status: err.status || 500,
+        message: err.message || 'Internal Server Error',
+      },
+    });
+    if (!err) {
+      next(err);
+    }
+  }
+);
+
+export default app;

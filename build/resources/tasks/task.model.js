@@ -1,43 +1,10 @@
 "use strict";
-/**
- * Task model
- * @module task-model
- */
-const uuid = require('uuid').v4;
-/**
- * createTask type definition
- * @global
- * @typedef {Object} createTask       Contains parameters for creating task instance
- * @property {string} [id]            Unique task id
- * @property {string} title           Task title
- * @property {string} order           Task order
- * @property {string} description     Task description
- * @property {number} userId          Task owner user userId
- * @property {number} boardId         Task owner board userId
- * @property {number} columnId        Task owner column userId
- */
-/**
- * viewTask type definition
- * @global
- * @typedef {Object} viewTask         Contains task`s parameters for responce
- * @property {string} [id]            Unique task id
- * @property {string} title           Task title
- * @property {string} order           Task order
- * @property {string} description     Task description
- * @property {number} userId          Task owner user userId
- * @property {number} boardId         Task owner board userId
- * @property {number} columnId        Task owner column userId
- */
-/** Class representing a task.
- * @global
- */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Task = void 0;
+const uuid_1 = require("uuid");
 class Task {
-    /**
-     * Create a task.
-     * @param {createTask} createTask Parameters for creating task instance
-     */
-    constructor({ id = uuid(), title = 'Title', order = 0, description = 'description', userId = null, boardId = null, columnId = null, } = {}) {
-        this.id = id;
+    constructor({ title = 'Title', order = 0, description = 'description', userId = null, boardId = null, columnId = null, }) {
+        this.id = uuid_1.v4();
         this.title = title;
         this.order = order;
         this.description = description;
@@ -45,15 +12,17 @@ class Task {
         this.boardId = boardId;
         this.columnId = columnId;
     }
-    /**
-     * Return a representing of task for response
-     * @static
-     * @param {Task} task a task
-     * @returns {viewTask} task`s parameters for responce
-     */
-    static toResponse(task) {
-        const { id, title, order, description, userId, boardId, columnId } = task;
-        return { id, title, order, description, userId, boardId, columnId };
+    toResponse() {
+        const viewtask = {
+            id: this.id,
+            title: this.title,
+            order: this.order,
+            description: this.description,
+            userId: this.userId,
+            boardId: this.boardId,
+            columnId: this.columnId,
+        };
+        return viewtask;
     }
 }
-module.exports = Task;
+exports.Task = Task;

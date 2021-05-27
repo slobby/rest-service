@@ -1,41 +1,57 @@
-const boardsRepo = require('./board.memory.repository');
-const Board = require('./board.model');
+import boardsRepo from './board.memory.repository';
+import { Board } from './board.model';
+import {
+  updateBoard,
+  viewBoard,
+  createFromRawBoard,
+} from '../../interfaces/boardInterfaces';
 
-const getAll = async () => {
-  const boards = await boardsRepo.getAll();
-  return boards.map(Board.toResponse);
-}
+const getAll = async (): Promise<Array<viewBoard>> => {
+  const boards: Array<Board> = await boardsRepo.getAll();
+  return boards.map((element: Board): viewBoard => element.toResponse());
+};
 
-const getById = async (id) => {
-  const board = await boardsRepo.getById(id);
+const getById = async (id: string): Promise<viewBoard | undefined> => {
+  const board: Board | undefined = await boardsRepo.getById(id);
   if (board) {
-    return Board.toResponse(board);
+    return board.toResponse();
   }
   return undefined;
-}
+};
 
-const create = async ({title, columns}) => {
-  const board = await boardsRepo.create({title, columns});
+const create = async ({
+  title,
+  columns,
+}: createFromRawBoard): Promise<viewBoard | undefined> => {
+  const board: Board | undefined = await boardsRepo.create({ title, columns });
   if (board) {
-    return Board.toResponse(board);
+    return board.toResponse();
   }
   return undefined;
-}
+};
 
-const update = async ({id, title, columns}) => {
-  const board = await boardsRepo.update({id, title, columns});
+const update = async ({
+  id,
+  title,
+  columns,
+}: updateBoard): Promise<viewBoard | undefined> => {
+  const board: Board | undefined = await boardsRepo.update({
+    id,
+    title,
+    columns,
+  });
   if (board) {
-    return Board.toResponse(board);
+    return board.toResponse();
   }
   return undefined;
-}
+};
 
-const deletById = async (id) => {
-  const board = await boardsRepo.deletById(id);
+const deletById = async (id: string): Promise<viewBoard | undefined> => {
+  const board: Board | undefined = await boardsRepo.deletById(id);
   if (board) {
-    return Board.toResponse(board);
+    return board.toResponse();
   }
   return undefined;
-}
+};
 
-module.exports = { getAll, getById, create, update, deletById };
+export default { getAll, getById, create, update, deletById };

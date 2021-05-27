@@ -1,36 +1,43 @@
 "use strict";
-const boardsRepo = require('./board.memory.repository');
-const Board = require('./board.model');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const board_memory_repository_1 = __importDefault(require("./board.memory.repository"));
 const getAll = async () => {
-    const boards = await boardsRepo.getAll();
-    return boards.map(Board.toResponse);
+    const boards = await board_memory_repository_1.default.getAll();
+    return boards.map((element) => element.toResponse());
 };
 const getById = async (id) => {
-    const board = await boardsRepo.getById(id);
+    const board = await board_memory_repository_1.default.getById(id);
     if (board) {
-        return Board.toResponse(board);
+        return board.toResponse();
     }
     return undefined;
 };
-const create = async ({ title, columns }) => {
-    const board = await boardsRepo.create({ title, columns });
+const create = async ({ title, columns, }) => {
+    const board = await board_memory_repository_1.default.create({ title, columns });
     if (board) {
-        return Board.toResponse(board);
+        return board.toResponse();
     }
     return undefined;
 };
-const update = async ({ id, title, columns }) => {
-    const board = await boardsRepo.update({ id, title, columns });
+const update = async ({ id, title, columns, }) => {
+    const board = await board_memory_repository_1.default.update({
+        id,
+        title,
+        columns,
+    });
     if (board) {
-        return Board.toResponse(board);
+        return board.toResponse();
     }
     return undefined;
 };
 const deletById = async (id) => {
-    const board = await boardsRepo.deletById(id);
+    const board = await board_memory_repository_1.default.deletById(id);
     if (board) {
-        return Board.toResponse(board);
+        return board.toResponse();
     }
     return undefined;
 };
-module.exports = { getAll, getById, create, update, deletById };
+exports.default = { getAll, getById, create, update, deletById };

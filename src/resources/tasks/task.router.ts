@@ -1,5 +1,7 @@
-const router = require('express').Router({mergeParams : true});
-const tasksController = require('./task.controller');
+import { Router } from 'express';
+import tasksController from './task.controller';
+
+const router: Router = Router({ mergeParams: true });
 
 router.route('/').get(tasksController.getAll);
 
@@ -11,4 +13,4 @@ router.route('/:taskId').put(tasksController.update);
 
 router.route('/:taskId').delete(tasksController.deletById);
 
-module.exports = router;
+export default router;

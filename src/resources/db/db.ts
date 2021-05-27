@@ -11,8 +11,8 @@ export interface IDB {
 }
 
 export const dataBase: IDB = {
-  users: new Array<User>(),
-  boards: new Array<Board>(),
-  columns: new Array<Column>(),
-  tasks: new Array<Task>(),
+  users: [],
+  boards: [],
+  columns: [],
+  tasks: [],
 };

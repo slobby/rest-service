@@ -1,28 +1,36 @@
 "use strict";
-const createError = require('http-errors');
-const { StatusCodes } = require('http-status-codes');
-const usersService = require('./user.service');
-const getAll = async (req, res, next) => {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const http_errors_1 = __importDefault(require("http-errors"));
+const http_status_codes_1 = __importDefault(require("http-status-codes"));
+const user_service_1 = __importDefault(require("./user.service"));
+const getAll = async (_, res, next) => {
     try {
-        const users = await usersService.getAll();
-        res.status(StatusCodes.OK).json(users);
+        const users = await user_service_1.default.getAll();
+        res.status(http_status_codes_1.default.OK).json(users);
     }
     catch (error) {
-        next(createError.NotFound('Not found users.'));
+        next(new http_errors_1.default.NotFound('Not found users.'));
     }
 };
 const create = async (req, res, next) => {
     try {
         const { name, login, password } = req.body;
         if (!name || !login || !password) {
-            throw createError.BadRequest('Received not all fields for user.');
+            throw new http_errors_1.default.BadRequest('Received not all fields for user.');
         }
-        const user = await usersService.create({ name, login, password });
+        const user = await user_service_1.default.create({
+            name,
+            login,
+            password,
+        });
         if (user) {
-            res.status(StatusCodes.CREATED).json(user);
+            res.status(http_status_codes_1.default.CREATED).json(user);
         }
         else {
-            throw createError.InternalServerError('Couldn`t create user.');
+            throw new http_errors_1.default.InternalServerError('Couldn`t create user.');
         }
     }
     catch (error) {
@@ -31,16 +39,16 @@ const create = async (req, res, next) => {
 };
 const getById = async (req, res, next) => {
     try {
-        const id = req.params.userId;
+        const id = req.params['userId'];
         if (!id) {
-            throw createError.BadRequest('Don`t receive user id.');
+            throw new http_errors_1.default.BadRequest('Don`t receive user id.');
         }
-        const user = await usersService.getById(id);
+        const user = await user_service_1.default.getById(id);
         if (user) {
-            res.status(StatusCodes.OK).json(user);
+            res.status(http_status_codes_1.default.OK).json(user);
         }
         else {
-            throw createError.NotFound('Not found.');
+            throw new http_errors_1.default.NotFound('Not found.');
         }
     }
     catch (error) {
@@ -49,17 +57,22 @@ const getById = async (req, res, next) => {
 };
 const update = async (req, res, next) => {
     try {
-        const id = req.params.userId;
+        const id = req.params['userId'];
         const { name, login, password } = req.body;
         if (!id || !name || !login || !password) {
-            throw createError.BadRequest('Received not all fields for user.');
+            throw new http_errors_1.default.BadRequest('Received not all fields for user.');
         }
-        const user = await usersService.update({ id, name, login, password });
+        const user = await user_service_1.default.update({
+            id,
+            name,
+            login,
+            password,
+        });
         if (user) {
-            res.status(StatusCodes.OK).json(user);
+            res.status(http_status_codes_1.default.OK).json(user);
         }
         else {
-            throw createError.NotFound('Not found.');
+            throw new http_errors_1.default.NotFound('Not found.');
         }
     }
     catch (error) {
@@ -68,20 +81,20 @@ const update = async (req, res, next) => {
 };
 const deletById = async (req, res, next) => {
     try {
-        const id = req.params.userId;
+        const id = req.params['userId'];
         if (!id) {
-            throw createError.BadRequest('Don`t receive user id.');
+            throw new http_errors_1.default.BadRequest('Don`t receive user id.');
         }
-        const user = await usersService.deletById(id);
+        const user = await user_service_1.default.deletById(id);
         if (user) {
-            res.status(StatusCodes.NO_CONTENT).json(user);
+            res.status(http_status_codes_1.default.NO_CONTENT).json(user);
         }
         else {
-            throw createError.NotFound('Not found.');
+            throw new http_errors_1.default.NotFound('Not found.');
         }
     }
     catch (error) {
         next(error);
     }
 };
-module.exports = { getAll, create, getById, update, deletById };
+exports.default = { getAll, create, getById, update, deletById };

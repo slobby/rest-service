@@ -1,42 +1,26 @@
-/**
- * Column model module
- * @module column-model
- */
+import { v4 as uuid } from 'uuid';
+import { createColumn, viewColumn } from '../../interfaces/columnInterfaces';
+import { IModel } from '../../interfaces/interfaces';
 
-const uuid = require('uuid').v4;
+export class Column implements IModel<viewColumn> {
+  id: string;
 
-/**
- * createColumn type definition
- * @global
- * @typedef {Object} createColumn Contains parameters for creating column instance
- * @property {string} [id]        Unique column id
- * @property {string} title       Column title
- * @property {number} order       Column order
- */
+  title: string;
 
-/** Class representing a column.
- * @global
- */
-class Column {
-  /**
-   * Create a column.
-   * @param {createColumn} createColumn Parameters for creating column instance
-   */
-  constructor({ id = uuid(), title = 'Column', order = 0 } = {}) {
-    this.id = id;
+  order: number;
+
+  constructor({ title = 'Column', order = 0 }: createColumn) {
+    this.id = uuid();
     this.title = title;
     this.order = order;
   }
 
-  /**
-   * Return a representing of column for response
-   * @static
-   * @param {Column} column a column
-   * @returns {Column} column`s parameters for responce
-   */
-  static toResponse(column) {
-    return column;
+  toResponse(): viewColumn {
+    const viewcolumn: viewColumn = {
+      id: this.id,
+      title: this.title,
+      order: this.order,
+    };
+    return viewcolumn;
   }
 }
-
-module.exports = Column;

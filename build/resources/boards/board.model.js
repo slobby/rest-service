@@ -1,27 +1,10 @@
 "use strict";
-/**
- * Board model
- * @module board-model
- */
-const uuid = require('uuid').v4;
-/**
- * createBoard type definition
- * @global
- * @typedef {Object} createBoard      Contains parameters for creating board instance
- * @property {string} [id]            Unique board id
- * @property {string} title           Board title
- * @property {Array<Column>} columns  List of columns
- */
-/** Class representing a board.
- * @global
- */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Board = void 0;
+const uuid_1 = require("uuid");
 class Board {
-    /**
-     * Create a board.
-     * @param {createBoard} createBoard Parameters for creating board instance
-     */
-    constructor({ id = uuid(), title = 'Board', columns = [] } = {}) {
-        this.id = id;
+    constructor({ title = 'Board', columns = [] }) {
+        this.id = uuid_1.v4();
         this.title = title;
         this.columns = columns;
     }
@@ -31,8 +14,13 @@ class Board {
      * @param {Board} board a board
      * @returns {Board} board`s parameters for responce
      */
-    static toResponse(board) {
-        return board;
+    toResponse() {
+        const viewboard = {
+            id: this.id,
+            title: this.title,
+            columns: this.columns,
+        };
+        return viewboard;
     }
 }
-module.exports = Board;
+exports.Board = Board;

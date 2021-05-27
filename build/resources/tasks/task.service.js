@@ -1,36 +1,54 @@
 "use strict";
-const tasksRepo = require('./task.memory.repository');
-const Task = require('./task.model');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const task_memory_repository_1 = __importDefault(require("./task.memory.repository"));
 const getAll = async (boardId) => {
-    const tasks = await tasksRepo.getAll(boardId);
-    return tasks.map(Task.toResponse);
+    const tasks = await task_memory_repository_1.default.getAll(boardId);
+    return tasks.map((element) => element.toResponse());
 };
-const getById = async ({ boardId, id }) => {
-    const task = await tasksRepo.getById({ boardId, id });
+const getById = async ({ boardId, id, }) => {
+    const task = await task_memory_repository_1.default.getById({ boardId, id });
     if (task) {
-        return Task.toResponse(task);
+        return task.toResponse();
     }
     return undefined;
 };
-const create = async ({ title, order, description, userId, boardId, columnId }) => {
-    const task = await tasksRepo.create({ title, order, description, userId, boardId, columnId });
+const create = async ({ title, order, description, userId, boardId, columnId, }) => {
+    const task = await task_memory_repository_1.default.create({
+        title,
+        order,
+        description,
+        userId,
+        boardId,
+        columnId,
+    });
     if (task) {
-        return Task.toResponse(task);
+        return task.toResponse();
     }
     return undefined;
 };
-const update = async ({ id, title, order, description, userId, boardId, columnId }) => {
-    const task = await tasksRepo.update({ id, title, order, description, userId, boardId, columnId });
+const update = async ({ id, title, order, description, userId, boardId, columnId, }) => {
+    const task = await task_memory_repository_1.default.update({
+        id,
+        title,
+        order,
+        description,
+        userId,
+        boardId,
+        columnId,
+    });
     if (task) {
-        return Task.toResponse(task);
+        return task.toResponse();
     }
     return undefined;
 };
-const deletById = async ({ boardId, id }) => {
-    const task = await tasksRepo.deletById({ boardId, id });
+const deletById = async ({ boardId, id, }) => {
+    const task = await task_memory_repository_1.default.deletById({ boardId, id });
     if (task) {
-        return Task.toResponse(task);
+        return task.toResponse();
     }
     return undefined;
 };
-module.exports = { getAll, getById, create, update, deletById };
+exports.default = { getAll, getById, create, update, deletById };
