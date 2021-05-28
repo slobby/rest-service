@@ -18,6 +18,12 @@ git clone https://github.com/slobby/rest-service.git -b API
 npm install
 ```
 
+## Build application
+
+```
+npm run build
+```
+
 ## Running application
 
 ```
