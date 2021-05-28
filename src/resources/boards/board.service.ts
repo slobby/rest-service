@@ -1,10 +1,10 @@
-import boardsRepo from './board.memory.repository';
-import { Board } from './board.model';
+import boardsRepo from './board.memory.repository.js';
+import { Board } from './board.model.js';
 import {
   updateBoard,
   viewBoard,
   createFromRawBoard,
-} from '../../interfaces/boardInterfaces';
+} from '../../interfaces/boardInterfaces.js';
 
 const getAll = async (): Promise<Array<viewBoard>> => {
   const boards: Array<Board> = await boardsRepo.getAll();

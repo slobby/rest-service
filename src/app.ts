@@ -1,14 +1,17 @@
 import express from 'express';
 import createError from 'http-errors';
-
 import fs from 'fs';
 import logger from 'morgan';
 import swaggerUI from 'swagger-ui-express';
-import path from 'path';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import YAML from 'yamljs';
-import userRouter from './resources/users/user.router';
-import boardRouter from './resources/boards/board.router';
-import taskRouter from './resources/tasks/task.router';
+import userRouter from './resources/users/user.router.js';
+import boardRouter from './resources/boards/board.router.js';
+import taskRouter from './resources/tasks/task.router.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));

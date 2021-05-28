@@ -1,14 +1,17 @@
-import { dataBase } from '../db/db';
-import { Board } from './board.model';
-import { Task } from '../tasks/task.model';
-import { Column } from '../columns/column.model';
-import columnsRepo from '../columns/column.memory.repository';
-import tasksRepo from '../tasks/task.memory.repository';
+import { dataBase } from '../db/db.js';
+import { Board } from './board.model.js';
+import { Task } from '../tasks/task.model.js';
+import { Column } from '../columns/column.model.js';
+import columnsRepo from '../columns/column.memory.repository.js';
+import tasksRepo from '../tasks/task.memory.repository.js';
 import {
   updateBoard,
   createFromRawBoard,
-} from '../../interfaces/boardInterfaces';
-import { createColumn, updateColumn } from '../../interfaces/columnInterfaces';
+} from '../../interfaces/boardInterfaces.js';
+import {
+  createColumn,
+  updateColumn,
+} from '../../interfaces/columnInterfaces.js';
 
 const getAll = async (): Promise<Array<Board>> => dataBase.boards;
 

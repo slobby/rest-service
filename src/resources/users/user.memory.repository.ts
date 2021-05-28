@@ -1,7 +1,7 @@
-import { dataBase } from '../db/db';
-import { User } from './user.model';
-import { Task } from '../tasks/task.model';
-import { createUser, updateUser } from '../../interfaces/userInterfaces';
+import { dataBase } from '../db/db.js';
+import { User } from './user.model.js';
+import { Task } from '../tasks/task.model.js';
+import { createUser, updateUser } from '../../interfaces/userInterfaces.js';
 
 const getAll = async (): Promise<Array<User>> => dataBase.users;
 

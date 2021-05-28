@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
 import StatusCodes from 'http-status-codes';
-import usersService from './user.service';
-import { viewUser } from '../../interfaces/userInterfaces';
+import usersService from './user.service.js';
+import { viewUser } from '../../interfaces/userInterfaces.js';
 
 const getAll = async (
   _: Request,

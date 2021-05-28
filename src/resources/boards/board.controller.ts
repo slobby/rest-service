@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
 import StatusCodes from 'http-status-codes';
-import boardsService from './board.service';
-import { viewBoard } from '../../interfaces/boardInterfaces';
+import boardsService from './board.service.js';
+import { viewBoard } from '../../interfaces/boardInterfaces.js';
 
 const getAll = async (
   _: Request,

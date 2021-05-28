@@ -1,7 +1,7 @@
-import { User } from '../users/user.model';
-import { Board } from '../boards/board.model';
-import { Column } from '../columns/column.model';
-import { Task } from '../tasks/task.model';
+import { User } from '../users/user.model.js';
+import { Board } from '../boards/board.model.js';
+import { Column } from '../columns/column.model.js';
+import { Task } from '../tasks/task.model.js';
 
 export interface IDB {
   users: Array<User>;
