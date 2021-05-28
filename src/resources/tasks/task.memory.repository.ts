@@ -1,5 +1,5 @@
-import { dataBase } from '../db/db';
-import { Task } from './task.model';
+import { dataBase } from '../db/db.js';
+import { Task } from './task.model.js';
 
 import {
   createTask,

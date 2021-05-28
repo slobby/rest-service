@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.dataBase = void 0;
-exports.dataBase = {
+export const dataBase = {
     users: [],
     boards: [],
     columns: [],

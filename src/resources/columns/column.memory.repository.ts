@@ -1,7 +1,10 @@
-import { dataBase } from '../db/db';
-import { Column } from './column.model';
-import { Task } from '../tasks/task.model';
-import { createColumn, updateColumn } from '../../interfaces/columnInterfaces';
+import { dataBase } from '../db/db.js';
+import { Column } from './column.model.js';
+import { Task } from '../tasks/task.model.js';
+import {
+  createColumn,
+  updateColumn,
+} from '../../interfaces/columnInterfaces.js';
 
 const getAll = async (): Promise<Array<Column>> => dataBase.columns;
 

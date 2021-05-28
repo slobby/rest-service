@@ -1,29 +1,27 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const http_errors_1 = __importDefault(require("http-errors"));
-const fs_1 = __importDefault(require("fs"));
-const morgan_1 = __importDefault(require("morgan"));
-const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
-const path_1 = __importDefault(require("path"));
-const yamljs_1 = __importDefault(require("yamljs"));
-const user_router_1 = __importDefault(require("./resources/users/user.router"));
-const board_router_1 = __importDefault(require("./resources/boards/board.router"));
-const task_router_1 = __importDefault(require("./resources/tasks/task.router"));
-const app = express_1.default();
-const swaggerDocument = yamljs_1.default.load(path_1.default.join(__dirname, '../doc/api.yaml'));
+import express from 'express';
+import createError from 'http-errors';
+import fs from 'fs';
+import logger from 'morgan';
+import swaggerUI from 'swagger-ui-express';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import YAML from 'yamljs';
+import userRouter from './resources/users/user.router.js';
+import boardRouter from './resources/boards/board.router.js';
+import taskRouter from './resources/tasks/task.router.js';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const app = express();
+const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 if (app.get('env') === 'production') {
-    const accessLogStream = fs_1.default.createWriteStream(path_1.default.join(__dirname, '../log/', 'access.log'), { flags: 'a' });
-    app.use(morgan_1.default('combined', { stream: accessLogStream }));
+    const accessLogStream = fs.createWriteStream(path.join(__dirname, '../log/', 'access.log'), { flags: 'a' });
+    app.use(logger('combined', { stream: accessLogStream }));
 }
 else {
-    app.use(morgan_1.default('dev'));
+    app.use(logger('dev'));
 }
-app.use(express_1.default.json());
-app.use('/doc', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
+app.use(express.json());
+app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use('/', (req, res, next) => {
     if (req.originalUrl === '/') {
         res.send('Service is running!');
@@ -31,11 +29,11 @@ app.use('/', (req, res, next) => {
     }
     next();
 });
-app.use('/users', user_router_1.default);
-app.use('/boards', board_router_1.default);
-app.use('/boards/:boardId/tasks', task_router_1.default);
+app.use('/users', userRouter);
+app.use('/boards', boardRouter);
+app.use('/boards/:boardId/tasks', taskRouter);
 app.use((_req, _res, next) => {
-    next(http_errors_1.default(404, 'Not found'));
+    next(createError(404, 'Not found'));
 });
 app.use((err, _req, res, next) => {
     res.status(err.status || 500);
@@ -49,4 +47,4 @@ app.use((err, _req, res, next) => {
         next(err);
     }
 });
-exports.default = app;
+export default app;

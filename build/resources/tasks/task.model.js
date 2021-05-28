@@ -1,10 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Task = void 0;
-const uuid_1 = require("uuid");
-class Task {
+import { v4 as uuid } from 'uuid';
+export class Task {
     constructor({ title = 'Title', order = 0, description = 'description', userId = null, boardId = null, columnId = null, }) {
-        this.id = uuid_1.v4();
+        this.id = uuid();
         this.title = title;
         this.order = order;
         this.description = description;
@@ -25,4 +22,3 @@ class Task {
         return viewtask;
     }
 }
-exports.Task = Task;

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import tasksController from './task.controller';
+import tasksController from './task.controller.js';
 
 const router: Router = Router({ mergeParams: true });
 

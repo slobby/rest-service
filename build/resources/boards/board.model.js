@@ -1,10 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Board = void 0;
-const uuid_1 = require("uuid");
-class Board {
+import { v4 as uuid } from 'uuid';
+export class Board {
     constructor({ title = 'Board', columns = [] }) {
-        this.id = uuid_1.v4();
+        this.id = uuid();
         this.title = title;
         this.columns = columns;
     }
@@ -23,4 +20,3 @@ class Board {
         return viewboard;
     }
 }
-exports.Board = Board;

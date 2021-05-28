@@ -1,29 +1,24 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const board_memory_repository_1 = __importDefault(require("./board.memory.repository"));
+import boardsRepo from './board.memory.repository.js';
 const getAll = async () => {
-    const boards = await board_memory_repository_1.default.getAll();
+    const boards = await boardsRepo.getAll();
     return boards.map((element) => element.toResponse());
 };
 const getById = async (id) => {
-    const board = await board_memory_repository_1.default.getById(id);
+    const board = await boardsRepo.getById(id);
     if (board) {
         return board.toResponse();
     }
     return undefined;
 };
 const create = async ({ title, columns, }) => {
-    const board = await board_memory_repository_1.default.create({ title, columns });
+    const board = await boardsRepo.create({ title, columns });
     if (board) {
         return board.toResponse();
     }
     return undefined;
 };
 const update = async ({ id, title, columns, }) => {
-    const board = await board_memory_repository_1.default.update({
+    const board = await boardsRepo.update({
         id,
         title,
         columns,
@@ -34,10 +29,10 @@ const update = async ({ id, title, columns, }) => {
     return undefined;
 };
 const deletById = async (id) => {
-    const board = await board_memory_repository_1.default.deletById(id);
+    const board = await boardsRepo.deletById(id);
     if (board) {
         return board.toResponse();
     }
     return undefined;
 };
-exports.default = { getAll, getById, create, update, deletById };
+export default { getAll, getById, create, update, deletById };

@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import { createTask, viewTask } from '../../interfaces/taskInterfaces';
-import { IModel } from '../../interfaces/interfaces';
+import { createTask, viewTask } from '../../interfaces/taskInterfaces.js';
+import { IModel } from '../../interfaces/interfaces.js';
 
 export class Task implements IModel<viewTask> {
   id: string;

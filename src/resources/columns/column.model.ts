@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import { createColumn, viewColumn } from '../../interfaces/columnInterfaces';
-import { IModel } from '../../interfaces/interfaces';
+import { createColumn, viewColumn } from '../../interfaces/columnInterfaces.js';
+import { IModel } from '../../interfaces/interfaces.js';
 
 export class Column implements IModel<viewColumn> {
   id: string;

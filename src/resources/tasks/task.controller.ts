@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
 import StatusCodes from 'http-status-codes';
-import tasksService from './task.service';
-import { viewTask } from '../../interfaces/taskInterfaces';
+import tasksService from './task.service.js';
+import { viewTask } from '../../interfaces/taskInterfaces.js';
 
 const getAll = async (
   req: Request,

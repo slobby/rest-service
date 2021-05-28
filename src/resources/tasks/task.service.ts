@@ -1,5 +1,5 @@
-import tasksRepo from './task.memory.repository';
-import { Task } from './task.model';
+import tasksRepo from './task.memory.repository.js';
+import { Task } from './task.model.js';
 import {
   createTask,
   updateTask,

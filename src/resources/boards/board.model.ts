@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
-import { createBoard, viewBoard } from '../../interfaces/boardInterfaces';
-import { IModel } from '../../interfaces/interfaces';
-import { Column } from '../columns/column.model';
+import { createBoard, viewBoard } from '../../interfaces/boardInterfaces.js';
+import { IModel } from '../../interfaces/interfaces.js';
+import { Column } from '../columns/column.model.js';
 
 export class Board implements IModel<viewBoard> {
   id: string;

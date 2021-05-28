@@ -1,10 +1,10 @@
-import usersRepo from './user.memory.repository';
-import { User } from './user.model';
+import usersRepo from './user.memory.repository.js';
+import { User } from './user.model.js';
 import {
   createUser,
   updateUser,
   viewUser,
-} from '../../interfaces/userInterfaces';
+} from '../../interfaces/userInterfaces.js';
 
 const getAll = async (): Promise<Array<viewUser>> => {
   const users: Array<User> = await usersRepo.getAll();
