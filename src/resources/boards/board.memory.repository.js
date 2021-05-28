@@ -11,6 +11,7 @@ const tasksRepo = require('../tasks/task.memory.repository');
 
 /**
  * createBoard type definition
+ * @ignore
  * @typedef {Object} createBoard      Contains parameters for creating board instance
  * @property {string} [id]            Unique board id
  * @property {string} title           Board title
@@ -18,34 +19,26 @@ const tasksRepo = require('../tasks/task.memory.repository');
  */
 
 /**
- * updateBoard type definition
- * @typedef {Object} updateBoard      Contains parameters for creating board instance
- * @property {string} id              Unique board id
- * @property {string} title           Board title
- * @property {Array<Column>} columns  List of columns
- */
-
-/**
- * Returns the list of all boards
+ * Returns Promise with the list of all boards instances from DataBase
  * @async
  * @returns {Promise<Array<Board>>} The list of all boards
  */
 const getAll = async () => dataBase.boards;
 
 /**
- * Find the board by Id
+ * Returns Promise with the board instance found by its Id
  * @async
  * @param {string} id The Id of board
- * @returns {Promise<Board|undefined>} The board if success, or undefinded otherwise
+ * @returns {Promise<Board|undefined>} Promise with the found board instance if success, or undefinded otherwise
  */
 const getById = async (id) =>
   dataBase.boards.find((elment) => elment.id === id);
 
 /**
- * Create the new board
+ * Returns Promise with the new board instance, created from input parameters
  * @async
  * @param {createBoard} createColumn Parameters for creating board instance
- * @returns {Promise<Board>} Created board
+ * @returns {Promise<Board|undefined>} Promise with the new board instance if success, or undefinded otherwise
  */
 const create = async ({ title, columns }) => {
   if (!Array.isArray(columns)) {
@@ -63,9 +56,9 @@ const create = async ({ title, columns }) => {
 };
 
 /**
- * Update the board
+ * Returns Promise with the updated board instance
  * @param {updateBoard} updateColumn Parameters for update board instance
- * @returns {Promise<Board|undefined>} Updated board if success, or undefinded otherwise
+ * @returns {Promise<Board|undefined>} Promise with the updated board instance if success, or undefinded otherwise
  */
 const update = async ({ id, title, columns }) => {
   const findedBoardIndex = dataBase.boards.findIndex(
@@ -102,9 +95,9 @@ const update = async ({ id, title, columns }) => {
 };
 
 /**
- * Delete the board by Id
+ * Returns Promise with deleted board instance by Id
  * @param {string} id The Id of board
- * @returns {Promise<Board|undefined>} Deleted board if success, or undefinded otherwise
+ * @returns {Promise<Board|undefined>} Promise with deleted board if success, or undefinded otherwise
  */
 const deletById = async (id) => {
   const findedBoardIndex = dataBase.boards.findIndex(

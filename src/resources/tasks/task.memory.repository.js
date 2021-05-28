@@ -8,29 +8,31 @@ const Task = require('./task.model');
 
 /**
  * createTask type definition
+ * @ignore
  * @typedef {Object} createTask       Contains parameters for creating task instance
  * @property {string} [id]            Unique task id
  * @property {string} title           Task title
  * @property {string} order           Task order
  * @property {string} description     Task description
- * @property {number} userId          Task owner user userId
- * @property {number} boardId         Task owner board userId
- * @property {number} columnId        Task owner column userId
+ * @property {string|null} userId     Task owner user userId
+ * @property {string|null} boardId    Task owner board userId
+ * @property {string|null} columnId   Task owner column userId
  */
 
 /**
- * Returns the list of all tasks
+ * Returns Promise with the list of all tasks instances for board with 'boardId' from DataBase
  * @async
- * @returns {Promise<Array<Task>>} The list of all tasks
+ * @param {string} boardId The Id of board
+ * @returns {Promise<Array<Task>>} Promise with the list of all tasks instances for board with 'boardId'
  */
 const getAll = async (boardId) =>
   dataBase.tasks.filter((element) => element.boardId === boardId);
 
 /**
- * Find the task by Id
+ * Returns Promise with the task instance found by its Id
  * @async
- * @param {string} id The Id of task
- * @returns {Promise<Task|undefined>} The task if success, or undefinded otherwise
+ * @param {boardTaskId} boardtaskId Parameters for searching task, contains unique task id and board id
+ * @returns {Promise<Task|undefined>} Promise with the found task instance if success, or undefinded otherwise
  */
 const getById = async ({ boardId, id }) =>
   dataBase.tasks.find(
@@ -38,10 +40,10 @@ const getById = async ({ boardId, id }) =>
   );
 
 /**
- * Create the new task
+ * Promise with the new task instance, created from input parameters
  * @async
  * @param {createTask} createTask Parameters for creating task instance
- * @returns {Promise<Task>} Created task
+ * @returns {Promise<Task>} Promise with the new task instance
  */
 const create = async ({
   title,
@@ -64,9 +66,9 @@ const create = async ({
 };
 
 /**
- * Update the task
+ * Returns Promise with the updated task instance
  * @param {createTask} updateTask Parameters for update task instance
- * @returns {Promise<Task|undefined>} Updated task if success, or undefinded otherwise
+ * @returns {Promise<Task|undefined>} Promise with the updated task instance if success, or undefinded otherwise
  */
 const update = async ({
   id,
@@ -98,9 +100,9 @@ const update = async ({
 };
 
 /**
- * Delete the task by Id
- * @param {string} id The Id of task
- * @returns {Promise<Task|undefined>} Deleted task if success, or undefinded otherwise
+ * Returns Promise with deleted task instance by Id
+ * @param {boardTaskId} boardtaskId Parameters for searching task, contains unique task id and board id
+ * @returns {Promise<Task|undefined>} Promise with deleted task instance if success, or undefinded otherwise
  */
 const deletById = async ({ boardId, id }) => {
   const findedTaskIndex = dataBase.tasks.findIndex(

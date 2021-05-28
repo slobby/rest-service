@@ -13,9 +13,9 @@ const uuid = require('uuid').v4;
  * @property {string} title           Task title
  * @property {string} order           Task order
  * @property {string} description     Task description
- * @property {number} userId          Task owner user userId
- * @property {number} boardId         Task owner board userId
- * @property {number} columnId        Task owner column userId
+ * @property {string|null} userId     Task owner user userId
+ * @property {string|null} boardId    Task owner board userId
+ * @property {string|null} columnId   Task owner column userId
  */
 
 /**
@@ -26,9 +26,17 @@ const uuid = require('uuid').v4;
  * @property {string} title           Task title
  * @property {string} order           Task order
  * @property {string} description     Task description
- * @property {number} userId          Task owner user userId
- * @property {number} boardId         Task owner board userId
- * @property {number} columnId        Task owner column userId
+ * @property {number|null} userId     Task owner user userId
+ * @property {number|null} boardId    Task owner board userId
+ * @property {number|null} columnId   Task owner column userId
+ */
+
+/**
+ * boardTaskId type definition
+ * @global
+ * @typedef {Object} boardTaskId      Contains parameters for searching task
+ * @property {string} id              Unique task id
+ * @property {string} boardId         Unique board id
  */
 
 /** Class representing a task.
@@ -36,8 +44,8 @@ const uuid = require('uuid').v4;
  */
 class Task {
   /**
-   * Create a task.
-   * @param {createTask} createTask Parameters for creating task instance
+   * Creates a new task instance.
+   * @param {createTask} createTask Parameters for creating a new task instance
    */
   constructor({
     id = uuid(),
@@ -60,7 +68,8 @@ class Task {
   /**
    * Return a representing of task for response
    * @static
-   * @param {Task} task a task
+   * @memberof Task
+   * @param {Task} task a task instance
    * @returns {viewTask} task`s parameters for responce
    */
   static toResponse(task) {

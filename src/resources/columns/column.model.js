@@ -14,13 +14,22 @@ const uuid = require('uuid').v4;
  * @property {number} order       Column order
  */
 
+/**
+ * updateColumn type definition
+ * @global
+ * @typedef {Object} updateColumn Contains parameters for updating column instance
+ * @property {string} id          Unique column id
+ * @property {string} title       Column title
+ * @property {number} order       Column order
+ */
+
 /** Class representing a column.
  * @global
  */
 class Column {
   /**
-   * Create a column.
-   * @param {createColumn} createColumn Parameters for creating column instance
+   * Creates a new column instance.
+   * @param {createColumn} createColumn Parameters for creating a new column instance
    */
   constructor({ id = uuid(), title = 'Column', order = 0 } = {}) {
     this.id = id;
@@ -29,10 +38,11 @@ class Column {
   }
 
   /**
-   * Return a representing of column for response
+   * Returns a representing of column for response
    * @static
-   * @param {Column} column a column
-   * @returns {Column} column`s parameters for responce
+   * @memberof Column
+   * @param {Column} column a column instance
+   * @returns {Column} a column instance
    */
   static toResponse(column) {
     return column;

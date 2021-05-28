@@ -29,8 +29,8 @@ const uuid = require('uuid').v4;
  */
 class User {
   /**
-   * Create a user.
-   * @param {createUser} createUser Parameters for creating user instance
+   * Create a new user instance.
+   * @param {createUser} createUser Parameters for creating a new user instance
    */
   constructor({
     id = uuid(),
@@ -47,6 +47,7 @@ class User {
   /**
    * Return a representing of user for response
    * @static
+   * @memberof User
    * @param {User} user a user
    * @returns {viewUser} user`s parameters for responce
    */

@@ -8,6 +8,7 @@ const Column = require('./column.model');
 
 /**
  * createColumn type definition
+ * @ignore
  * @typedef {Object} createColumn Contains parameters for creating column instance
  * @property {string} [id]        Unique column id
  * @property {string} title       Column title
@@ -15,34 +16,26 @@ const Column = require('./column.model');
  */
 
 /**
- * updateColumn type definition
- * @typedef {Object} updateColumn Contains parameters for updating column instance
- * @property {string} id          Unique column id
- * @property {string} title       Column title
- * @property {number} order       Column order
- */
-
-/**
- * Returns the list of all columns
+ * Returns Promise with the list of all columns instances from DataBase
  * @async
- * @returns {Promise<Array<Column>>} The list of all columns
+ * @returns {Promise<Array<Column>>} Promise with the list of all columns instances
  */
 const getAll = async () => dataBase.columns;
 
 /**
- * Find the column by Id
+ * Returns Promise with the column instance found by its Id
  * @async
  * @param {string} id The Id of column
- * @returns {Promise<Column|undefined>} The column if success, or undefinded otherwise
+ * @returns {Promise<Column|undefined>} Promise with the found column instance if success, or undefinded otherwise
  */
 const getById = async (id) =>
   dataBase.columns.find((elment) => elment.id === id);
 
 /**
- * Create the new column
+ * Returns Promise with the new column instance, created from input parameters
  * @async
  * @param {createColumn} createColumn Parameters for creating column instance
- * @returns {Promise<Column>} Created column
+ * @returns {Promise<Column>} Promise with the new column instance
  */
 const create = async ({ title, order }) => {
   const column = new Column({ title, order });
@@ -51,9 +44,9 @@ const create = async ({ title, order }) => {
 };
 
 /**
- * Update the column
+ * Returns Promise with the updated column instance
  * @param {updateColumn} updateColumn Parameters for update column instance
- * @returns {Promise<Column|undefined>} Updated column if success, or undefinded otherwise
+ * @returns {Promise<Column|undefined>} Promise with the updated column instance if success, or undefinded otherwise
  */
 const update = async ({ id, title, order }) => {
   const findedColumnIndex = dataBase.columns.findIndex(
@@ -72,9 +65,9 @@ const update = async ({ id, title, order }) => {
 };
 
 /**
- * Delete the column by Id
+ * Returns Promise with deleted column instance by Id
  * @param {string} id The Id of column
- * @returns {Promise<Column|undefined>} Deleted column if success, or undefinded otherwise
+ * @returns {Promise<Column|undefined>} Promise with deleted column instance if success, or undefinded otherwise
  */
 const deletById = async (id) => {
   const findedColumnIndex = dataBase.columns.findIndex(

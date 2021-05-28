@@ -14,13 +14,22 @@ const uuid = require('uuid').v4;
  * @property {Array<Column>} columns  List of columns
  */
 
+/**
+ * updateBoard type definition
+ * @global
+ * @typedef {Object} updateBoard      Contains parameters for creating board instance
+ * @property {string} id              Unique board id
+ * @property {string} title           Board title
+ * @property {Array<Column>} columns  List of columns
+ */
+
 /** Class representing a board.
  * @global
  */
 class Board {
   /**
-   * Create a board.
-   * @param {createBoard} createBoard Parameters for creating board instance
+   * Creates a new a board instance.
+   * @param {createBoard} createBoard Parameters for creating a new board instance
    */
   constructor({ id = uuid(), title = 'Board', columns = [] } = {}) {
     this.id = id;
@@ -29,10 +38,11 @@ class Board {
   }
 
   /**
-   * Return a representing of board for response
+   * Returns a representing of board for response
    * @static
-   * @param {Board} board a board
-   * @returns {Board} board`s parameters for responce
+   * @memberof Board
+   * @param {Board} board a board instance
+   * @returns {Board} a board instance
    */
   static toResponse(board) {
     return board;

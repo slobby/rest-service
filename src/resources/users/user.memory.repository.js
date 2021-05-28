@@ -8,6 +8,7 @@ const User = require('./user.model');
 
 /**
  * createUser type definition
+ * @ignore
  * @typedef {Object} createUser Contains parameters for creating user instance
  * @property {string} [id]      Unique user id
  * @property {string} name      User name
@@ -16,25 +17,25 @@ const User = require('./user.model');
  */
 
 /**
- * Returns the list of all users
+ * Returns Promise with the list of all users instances from DataBase
  * @async
- * @returns {Promise<Array<User>>} The list of all users
+ * @returns {Promise<Array<User>>} Promise with the list of all users instances
  */
 const getAll = async () => dataBase.users;
 
 /**
- * Find the user by Id
+ * Returns Promise with the user instance found by its Id
  * @async
  * @param {string} id The Id of user
- * @returns {Promise<User|undefined>} The user if success, or undefinded otherwise
+ * @returns {Promise<User|undefined>} Promise with the found user instance if success, or undefinded otherwise
  */
 const getById = async (id) => dataBase.users.find((elment) => elment.id === id);
 
 /**
- * Create the new user
+ * Returns Promise with the new user instance, created from input parameters
  * @async
  * @param {createUser} createUser Parameters for creating user instance
- * @returns {Promise<User>} Created user
+ * @returns {Promise<User|undefined>} Promise with the new user instance if success, or undefinded otherwise
  */
 const create = async ({ name, login, password }) => {
   if (dataBase.users.find((elment) => elment.login === login)) {
@@ -46,9 +47,9 @@ const create = async ({ name, login, password }) => {
 };
 
 /**
- * Update the user
+ * Returns Promise with the updated user instance
  * @param {createUser} updateUser Parameters for update user instance
- * @returns {Promise<User|undefined>} Updated user if success, or undefinded otherwise
+ * @returns {Promise<User|undefined>} Promise with the updated user instance if success, or undefinded otherwise
  */
 const update = async ({ id, name, login, password }) => {
   const findedUserIndex = dataBase.users.findIndex(
@@ -68,9 +69,9 @@ const update = async ({ id, name, login, password }) => {
 };
 
 /**
- * Delete the user by Id
+ * Returns Promise with deleted user instance by Id
  * @param {string} id The Id of user
- * @returns {Promise<User|undefined>} Deleted user if success, or undefinded otherwise
+ * @returns {Promise<User|undefined>} Promise with deleted user instance if success, or undefinded otherwise
  */
 const deletById = async (id) => {
   const findedUserIndex = dataBase.users.findIndex(
