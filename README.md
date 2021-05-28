@@ -18,9 +18,9 @@ git clone https://github.com/slobby/rest-service.git -b task4
 npm install
 ```
 
-## Check 1 part
+## Check part 1
 
-Go to link https://github.com/slobby/rest-service/releases/tag/1.-Complite-first-part-jsdoc
+Go to tag 1.-Complite-first-part-jsdoc  link https://github.com/slobby/rest-service/releases/tag/1.-Complite-first-part-jsdoc
 
 or switch to commit
 
@@ -32,6 +32,8 @@ git checkout 3341940c28c531b18a97732ae66870599db36d10
 ```
 npm run doc
 ```
+
+## Check part 2
 
 ## Build application
 switch to head
