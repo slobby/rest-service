@@ -1,0 +1,13 @@
+{
+  "source": {
+    "include": ["src\\resources"],
+    "includePattern": ".+\\.js$"
+  },
+  "opts": {
+    "recurse": true,
+    "destination": "./out/"
+  },
+  "templates": {
+    "cleverLinks": true
+  }
+}
