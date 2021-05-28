@@ -7,13 +7,16 @@ const uuid = require('uuid').v4;
 
 /**
  * createBoard type definition
+ * @global
  * @typedef {Object} createBoard      Contains parameters for creating board instance
  * @property {string} [id]            Unique board id
  * @property {string} title           Board title
  * @property {Array<Column>} columns  List of columns
  */
 
-/** Class representing a board. */
+/** Class representing a board.
+ * @global
+ */
 class Board {
   /**
    * Create a board.

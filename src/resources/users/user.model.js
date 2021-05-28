@@ -1,12 +1,13 @@
 /**
  * User model
- * @module user:model
+ * @module user-model
  */
 
 const uuid = require('uuid').v4;
 
 /**
  * createUser type definition
+ * @global
  * @typedef {Object} createUser Contains parameters for creating user instance
  * @property {string} [id]      Unique user id
  * @property {string} name      User name
@@ -16,13 +17,16 @@ const uuid = require('uuid').v4;
 
 /**
  * viewUser type definition
+ * @global
  * @typedef {Object} viewUser   Contains user`s parameters for responce
  * @property {string} id        Unique user id
  * @property {string} name      User name
  * @property {string} login     User loggin
  */
 
-/** Class representing a user. */
+/** Class representing a user.
+ * @global
+ */
 class User {
   /**
    * Create a user.
