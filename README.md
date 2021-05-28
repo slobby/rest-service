@@ -9,7 +9,7 @@ This is an Express application, the application implements REST API.
 ## Downloading
 
 ```
-git clone https://github.com/slobby/rest-service.git -b API
+git clone https://github.com/slobby/rest-service.git -b task4
 ```
 
 ## Installing NPM modules
@@ -18,7 +18,27 @@ git clone https://github.com/slobby/rest-service.git -b API
 npm install
 ```
 
+## Check 1 part
+
+Go to link https://github.com/slobby/rest-service/releases/tag/1.-Complite-first-part-jsdoc
+
+or switch to commit
+
+```
+git checkout 3341940c28c531b18a97732ae66870599db36d10
+```
+## Create jsdoc files
+
+```
+npm run doc
+```
+
 ## Build application
+switch to head
+
+```
+git checkout
+```
 
 ```
 npm run build
