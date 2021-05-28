@@ -1,5 +1,5 @@
-import { Column } from '../resources/columns/column.model.js';
-import { createColumn, updateColumn } from './columnInterfaces.js';
+import { Column } from '../resources/columns/column.model';
+import { createColumn, updateColumn } from './columnInterfaces';
 
 export type createBoard = {
   title: string;
