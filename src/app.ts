@@ -8,14 +8,25 @@ import YAML from 'yamljs';
 import userRouter from './resources/users/user.router.js';
 import boardRouter from './resources/boards/board.router.js';
 import taskRouter from './resources/tasks/task.router.js';
-import { accessLogger } from './common/accessLogger.js';
-import { errorLogger } from './common/errorLogger.js';
+import { accessLogger, errorLogger } from './loggers/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
+
+process.on('unhandledRejection', (error: Error, _promise: Promise<any>) => {
+  errorLogger.error('unhandledRejection', error);
+  errorLogger.on('finish', () => process.exit(1));
+  errorLogger.end();
+});
+
+process.on('uncaughtException', (error: Error) => {
+  errorLogger.error('uncaughtException', error);
+  errorLogger.on('finish', () => process.exit(2));
+  errorLogger.end();
+});
 
 app.use(accessLogger);
 
@@ -65,5 +76,11 @@ app.use(
     errorLogger.error(err.message || 'Internal Server Error', err);
   }
 );
+
+// /*Uncomment, to check uncaughtException*/
+// throw Error('Oops! uncaughtException');
+
+// /*Uncomment, to check unhandledRejection*/
+// Promise.reject(Error('Oops! unhandledRejection'));
 
 export default app;

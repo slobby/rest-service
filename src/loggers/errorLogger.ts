@@ -1,7 +1,7 @@
 import winston from 'winston';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { NODE_ENV, ERROR_LOG_FILE, LOG_DIR } from './config.js';
+import { NODE_ENV, ERROR_LOG_FILE, LOG_DIR } from '../common/config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -40,17 +40,24 @@ const prodTransport = new winston.transports.File({
 });
 
 const transport = new winston.transports.Console({
-  format: formatter,
+  format: winston.format.combine(
+    winston.format.colorize({
+      colors: customLevels.colors,
+    }),
+    formatter
+  ),
 });
 
-transport;
-
 const getErrorLogger = (): winston.Logger => {
-  winston.addColors(customLevels.colors);
   return winston.createLogger({
     levels: customLevels.levels,
-    transports: [isProdEnvironment ? prodTransport : transport],
+    transports: [prodTransport],
   });
 };
 
 export const errorLogger = getErrorLogger();
+
+if (!isProdEnvironment) {
+  winston.addColors(customLevels.colors);
+  errorLogger.add(transport);
+}
