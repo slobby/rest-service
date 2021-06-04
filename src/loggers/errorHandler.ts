@@ -8,7 +8,7 @@ export const errorHandler = (
   _req: express.Request,
   res: express.Response,
   next: express.NextFunction
-) => {
+): void => {
   if (res.headersSent) {
     next(err);
   }

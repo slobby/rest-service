@@ -1,63 +1,92 @@
-import fs from 'fs';
-import morgan from 'morgan';
+import express from 'express';
+import winston from 'winston';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { finished } from 'stream';
 import { NODE_ENV, ACCESS_LOG_FILE, LOG_DIR } from '../common/config.js';
-import { Request, Response } from 'express';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const SPACE = 2;
+const SPACE = 4;
+const isProdEnvironment = NODE_ENV === 'production';
 
-type Handler<Request, Response> = (
-  req: Request,
-  res: Response,
-  callback: (err?: Error) => void
-) => void;
+const customLevels = { info: 3 };
 
-if (!fs.existsSync(path.join(__dirname, LOG_DIR))) {
-  fs.mkdirSync(path.join(__dirname, LOG_DIR));
-}
-
-const getFormatter = (space?: number): morgan.FormatFn<Request, Response> => {
-  return (tokens, req, res) => {
+const formatter = winston.format.combine(
+  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+  winston.format.splat(),
+  winston.format.printf((info) => {
+    const { timestamp, ...meta } = info;
     return JSON.stringify(
       {
-        'remote-address': tokens['remote-addr']?.(req, res),
-        'time': tokens['date']?.(req, res, 'iso'),
-        'method': tokens['method']?.(req, res),
-        'url': tokens['url']?.(req, res),
-        'http-version': tokens['http-version']?.(req, res),
-        'status-code': tokens['status']?.(req, res),
-        'query-parameters': req.query,
-        'req-params': req.params,
-        'body': req.body,
-        'response-time': tokens['response-time']?.(req, res),
-        'content-length': tokens['res']?.(req, res, 'content-length'),
-        'referrer': tokens['referrer']?.(req, res),
-        'user-agent': tokens['user-agent']?.(req, res),
+        'remote-address': meta['remoteAddr'],
+        time: timestamp,
+        method: meta['method'],
+        url: meta['url'],
+        'http-version': meta['httpVersion'],
+        'status-code': meta['statusCode'],
+        'query-parameters': meta['query'],
+        'req-params': meta['params'],
+        body: meta['body'],
+        'response-time': meta['responseTime'],
+        'content-length': meta['contentLength'],
+        'user-agent': meta['userAgent'],
       },
       null,
-      space
+      SPACE
     );
-  };
-};
+  })
+);
 
-const getAccessLogger = (): Handler<Request, Response> => {
-  let result: Handler<Request, Response>;
-  if (NODE_ENV === 'production') {
-    const accessLogStream = fs.createWriteStream(
-      path.join(__dirname, LOG_DIR, ACCESS_LOG_FILE),
-      { flags: 'a', encoding: 'utf8' }
-    );
-    result = morgan<Request, Response>(getFormatter(), {
-      stream: accessLogStream,
+const prodTransport = new winston.transports.File({
+  filename: path.join(__dirname, LOG_DIR, ACCESS_LOG_FILE),
+  level: 'info',
+  format: formatter,
+});
+
+const transport = new winston.transports.Console({
+  format: winston.format.combine(formatter, winston.format.prettyPrint()),
+});
+
+const logger = winston.createLogger({
+  levels: customLevels,
+  transports: [prodTransport],
+});
+
+if (!isProdEnvironment) {
+  logger.add(transport);
+}
+
+export const accessLogger = (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+): void => {
+  const { body = {}, httpVersion, method, params, query, url } = req;
+  console.log('-------');
+  console.log(req.body);
+  console.log('-------');
+  const remoteAddr = req.header('x-real-ip') || req.socket.remoteAddress;
+  const userAgent = req.header('user-agent');
+  const time = Date.now();
+  next();
+  finished(res, () => {
+    const responseTime = Date.now() - time;
+    const contentLength = res.get('content-length');
+    const { statusCode } = res;
+    logger.info('Recieved request', {
+      remoteAddr,
+      method,
+      url,
+      httpVersion,
+      statusCode,
+      query,
+      params,
+      body,
+      responseTime,
+      contentLength,
+      userAgent,
     });
-  } else {
-    result = morgan<Request, Response>(getFormatter(SPACE));
-  }
-  return result;
+  });
 };
-
-export const accessLogger = getAccessLogger();

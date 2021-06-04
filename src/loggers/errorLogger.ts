@@ -48,14 +48,10 @@ const transport = new winston.transports.Console({
   ),
 });
 
-const getErrorLogger = (): winston.Logger => {
-  return winston.createLogger({
-    levels: customLevels.levels,
-    transports: [prodTransport],
-  });
-};
-
-export const errorLogger = getErrorLogger();
+export const errorLogger = winston.createLogger({
+  levels: customLevels.levels,
+  transports: [prodTransport],
+});
 
 if (!isProdEnvironment) {
   winston.addColors(customLevels.colors);
