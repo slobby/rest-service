@@ -18,7 +18,7 @@ git clone https://github.com/slobby/rest-service.git -b task5
 npm install
 ```
 
-## Build application
+## Building application
 switch to head
 
 ```
