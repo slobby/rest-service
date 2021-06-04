@@ -9,6 +9,10 @@ dotenv.config({
   path: path.join(__dirname, '../../.env'),
 });
 
+export const ACCESS_LOG_FILE = 'access.log';
+export const ERROR_LOG_FILE = 'error.log';
+export const LOG_DIR = '../../log';
+
 export const {
   PORT,
   NODE_ENV,

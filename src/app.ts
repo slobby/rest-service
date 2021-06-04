@@ -1,6 +1,6 @@
 import express from 'express';
 import createError from 'http-errors';
-import getLogger from './common/logger.js';
+import StatusCodes from 'http-status-codes';
 import swaggerUI from 'swagger-ui-express';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -8,6 +8,8 @@ import YAML from 'yamljs';
 import userRouter from './resources/users/user.router.js';
 import boardRouter from './resources/boards/board.router.js';
 import taskRouter from './resources/tasks/task.router.js';
+import { accessLogger } from './common/accessLogger.js';
+import { errorLogger } from './common/errorLogger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -15,7 +17,7 @@ const __dirname = dirname(__filename);
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 
-app.use(getLogger());
+app.use(accessLogger);
 
 app.use(express.json());
 
@@ -39,7 +41,7 @@ app.use(
     _res: express.Response,
     next: express.NextFunction
   ) => {
-    next(createError(404, 'Not found'));
+    next(new createError.NotFound('Not found'));
   }
 );
 
@@ -50,16 +52,17 @@ app.use(
     res: express.Response,
     next: express.NextFunction
   ) => {
-    res.status(err.status || 500);
-    res.send({
-      error: {
-        status: err.status || 500,
-        message: err.message || 'Internal Server Error'
-      }
-    });
-    if (!err) {
+    if (res.headersSent) {
       next(err);
     }
+    res.status(err.status || StatusCodes.INTERNAL_SERVER_ERROR);
+    res.send({
+      error: {
+        status: err.status || StatusCodes.INTERNAL_SERVER_ERROR,
+        message: err.message || 'Internal Server Error',
+      },
+    });
+    errorLogger.error(err.message || 'Internal Server Error', err);
   }
 );
 

@@ -1,7 +1,7 @@
 import { PORT } from './common/config.js';
-
 import app from './app.js';
+import { errorLogger } from './common/errorLogger.js';
 
 app.listen(PORT, () =>
-  process.stdout.write(`App is running on http://localhost:${PORT}\n`)
+  errorLogger.info(`App is running on http://localhost:${PORT}\n`)
 );
