@@ -22,10 +22,10 @@ const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 
 process.on('uncaughtException', uncaughtExceptionHandler);
 process.on('unhandledRejection', unhandledRejectionHandler);
+app.use(accessLogger);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(accessLogger);
 
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
