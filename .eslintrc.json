@@ -1,5 +1,6 @@
 {
   "root": true,
+  "parser": "@typescript-eslint/parser",
   "env": {
     "es2020": true,
     "jasmine": true,
@@ -8,17 +9,24 @@
   },
   "parserOptions": {
     "sourceType": "module",
+    "project": "./tsconfig.json",
     "ecmaVersion": 2021,
     "ecmaFeatures": {
       "impliedStrict": true
     }
   },
   "settings": {
-    "noInlineConfig": true
+    "noInlineConfig": true,
+    "import/resolver": {
+      "typescript": {}
+    }
   },
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
-    "plugin:node/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
     "airbnb-base",
     "prettier"
   ],
@@ -27,6 +35,7 @@
     "linebreak-style": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "dot-notation": 0
   }
 }
