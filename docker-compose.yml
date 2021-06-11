@@ -1,0 +1,43 @@
+version: '3'
+services:
+  app:
+    build: .
+    image: slobbery/app-node
+    restart: on-failure
+    depends_on:
+      - postgres
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@postgres:${DB_PORT}/${DB}
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
+    command: npm run start
+    volumes:
+      - ./log:/usr/app/log
+      - ./src:/usr/app/src
+    networks:
+      - app-net
+
+  postgres:
+    build: ./database/
+    image: slobbery/app-database
+    restart: always
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB}
+    volumes:
+      - ./database/base:/usr/app/database/base
+      - ./src:/usr/app/src
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.3.0/24
