@@ -30,8 +30,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB}
     volumes:
-      - ./database/base:/usr/app/database/base
-      - ./src:/usr/app/src
+      - postgresdata:/var/lib/postgresql/data
     networks:
       - app-net
 
@@ -41,3 +40,6 @@ networks:
     ipam:
       config:
         - subnet: 192.168.3.0/24
+
+volumes:
+  postgresdata:
