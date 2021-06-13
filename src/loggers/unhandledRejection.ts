@@ -7,7 +7,7 @@ export const unhandledRejectionHandler = (
 ): void => {
   errorLogger.error('unhandledRejection', error);
   finished(errorLogger, () => {
-    errorLogger.on('finish', () => process.exit(2));
     errorLogger.end();
+    process.exit(2);
   });
 };
