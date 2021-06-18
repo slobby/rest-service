@@ -57,8 +57,8 @@ const deletById = async (id: string): Promise<User | undefined> => {
     await userRepository.findByIds([id])
   )[0];
   if (findedUserDTO) {
-    const deletedUser = await userRepository.remove(findedUserDTO);
-    return new User({ ...deletedUser });
+    await userRepository.remove(findedUserDTO);
+    return new User({ ...findedUserDTO });
   }
   return undefined;
 };
