@@ -1,8 +1,9 @@
 import express from 'express';
 import createError from 'http-errors';
 import swaggerUI from 'swagger-ui-express';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
+// import path, { dirname } from 'path';
+// import { fileURLToPath } from 'url';
 import YAML from 'yamljs';
 import userRouter from './resources/users/user.router.js';
 import boardRouter from './resources/boards/board.router.js';
@@ -14,8 +15,8 @@ import {
   unhandledRejectionHandler,
 } from './loggers/index.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));

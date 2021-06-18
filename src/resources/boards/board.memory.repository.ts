@@ -1,3 +1,6 @@
+import { getRepository } from 'typeorm';
+import { BoardDTO } from './board.entity.js';
+import { ColumnDTO } from '../columns/column.entity.js';
 import { dataBase } from '../db/db.js';
 import { Board } from './board.model.js';
 import { Task } from '../tasks/task.model.js';
@@ -13,7 +16,19 @@ import {
   updateColumn,
 } from '../../interfaces/columnInterfaces.js';
 
-const getAll = async (): Promise<Array<Board>> => dataBase.boards;
+const getAll = async (): Promise<Array<Board>> => {
+  const boardRepository = getRepository(BoardDTO);
+  const boardsDTO = await boardRepository.find();
+  return boardsDTO.map((boardDTO) => {
+    const newBoard = new Board();
+    newBoard.id = boardDTO.id;
+    newBoard.title = boardDTO.title;
+    newBoard.columns = boardDTO.columns.map(
+      (element) => new Column({ ...element })
+    );
+    return newBoard;
+  });
+};
 
 const getById = async (id: string): Promise<Board | undefined> =>
   dataBase.boards.find((elment: Board) => elment.id === id);
@@ -22,15 +37,24 @@ const create = async ({
   title,
   columns,
 }: createFromRawBoard): Promise<Board> => {
-  const columnsToBoard: Array<Column> = [];
-  columns.forEach(async (element: createColumn) =>
-    columnsToBoard.push(
-      await columnsRepo.create({ title: element.title, order: element.order })
-    )
+  const boardRepository = getRepository(BoardDTO);
+  const columnsDTOToBoard: Array<ColumnDTO> = columns.map(
+    (element: createColumn) => {
+      const newColumnDTO: ColumnDTO = new ColumnDTO();
+      return Object.assign(newColumnDTO, element);
+    }
   );
-  const board = new Board({ title, columns: columnsToBoard });
-  dataBase.boards.push(board);
-  return board;
+  const boardDTO = new BoardDTO();
+  boardDTO.title = title;
+  boardDTO.columns = columnsDTOToBoard;
+  const newBoardDTO = await boardRepository.save(boardDTO);
+  const newBoard = new Board();
+  newBoard.id = newBoardDTO.id;
+  newBoard.title = newBoardDTO.title;
+  newBoard.columns = newBoardDTO.columns.map(
+    (element) => new Column({ ...element })
+  );
+  return newBoard;
 };
 
 const update = async ({

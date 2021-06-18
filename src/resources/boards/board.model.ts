@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { createBoard, viewBoard } from '../../interfaces/boardInterfaces.js';
+import { viewBoard } from '../../interfaces/boardInterfaces.js';
 import { IModel } from '../../interfaces/interfaces.js';
 import { Column } from '../columns/column.model.js';
 
@@ -10,18 +10,12 @@ export class Board implements IModel<viewBoard> {
 
   columns: Array<Column>;
 
-  constructor({ title = 'Board', columns = [] }: createBoard) {
-    this.id = uuid();
+  constructor({ id = uuid(), title = 'Board', columns = [] } = {}) {
+    this.id = id;
     this.title = title;
     this.columns = columns;
   }
 
-  /**
-   * Return a representing of board for response
-   * @static
-   * @param {Board} board a board
-   * @returns {Board} board`s parameters for responce
-   */
   toResponse(): viewBoard {
     const viewboard: viewBoard = {
       id: this.id,

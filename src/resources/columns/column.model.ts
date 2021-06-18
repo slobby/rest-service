@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { createColumn, viewColumn } from '../../interfaces/columnInterfaces.js';
+import { viewColumn } from '../../interfaces/columnInterfaces.js';
 import { IModel } from '../../interfaces/interfaces.js';
 
 export class Column implements IModel<viewColumn> {
@@ -9,8 +9,8 @@ export class Column implements IModel<viewColumn> {
 
   order: number;
 
-  constructor({ title = 'Column', order = 0 }: createColumn) {
-    this.id = uuid();
+  constructor({ id = uuid(), title = 'Column', order = 0 } = {}) {
+    this.id = id;
     this.title = title;
     this.order = order;
   }

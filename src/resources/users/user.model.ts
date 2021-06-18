@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { createUser, viewUser } from '../../interfaces/userInterfaces.js';
+import { viewUser } from '../../interfaces/userInterfaces.js';
 import { IModel } from '../../interfaces/interfaces.js';
 
 export class User implements IModel<viewUser> {
@@ -12,11 +12,12 @@ export class User implements IModel<viewUser> {
   password: string;
 
   constructor({
+    id = uuid(),
     name = 'USER',
     login = 'user',
     password = 'P@55w0rd',
-  }: createUser) {
-    this.id = uuid();
+  } = {}) {
+    this.id = id;
     this.name = name;
     this.login = login;
     this.password = password;
