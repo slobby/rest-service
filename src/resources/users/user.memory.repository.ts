@@ -1,7 +1,6 @@
 import { getRepository } from 'typeorm';
 import { UserDTO } from './user.entity.js';
 import { User } from './user.model.js';
-// import { Task } from '../tasks/task.model.js';
 import { createUser, updateUser } from '../../interfaces/userInterfaces.js';
 
 const getAll = async (): Promise<Array<User>> => {
