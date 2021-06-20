@@ -9,7 +9,9 @@
   "description": "REST service starter for RS School",
   "main": "build/server.js",
   "scripts": {
-    "start": "nodemon build/server.js",
+    "start": "nodemon -L --exitcrash",
+    "watch": "npm run build && npm run server",
+    "server": "node build/server.js",
     "lint": "eslint --ext .js,.ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace",

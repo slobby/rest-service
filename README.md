@@ -9,7 +9,7 @@ This is an Express application, the application implements REST API.
 ## Downloading
 
 ```
-git clone https://github.com/slobby/rest-service.git -b task5
+git clone https://github.com/slobby/rest-service.git -b task6
 ```
 
 ## Installing NPM modules
@@ -19,6 +19,7 @@ npm install
 ```
 
 ## Building application
+
 switch to head
 
 ```
@@ -60,6 +61,20 @@ npm test <suite name>
 ```
 npm run lint
 ```
+
+### Using Docker
+
+1. git clone https://github.com/slobby/rest-service.git -b task6
+2. run in cmd command
+
+```
+docker compose -p task6 up
+```
+
+3. Make some changes in code file, save and app will reload (look in console)
+4. In app.ts comment 23 line (process.on('uncaughtException', uncaughtExceptionHandler)) \
+   and uncomment 57 line (throw Error('Oops! uncaughtException')). Save and container app-node\
+   will start restarting.
 
 ### Debugging in VSCode
 
