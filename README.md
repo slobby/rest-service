@@ -9,7 +9,7 @@ This is an Express application, the application implements REST API.
 ## Downloading
 
 ```
-git clone https://github.com/slobby/rest-service.git -b task6
+git clone https://github.com/slobby/rest-service.git -b task7
 ```
 
 ## Installing NPM modules
