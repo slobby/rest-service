@@ -1,4 +1,4 @@
-import usersRepo from './user.memory.repository.js';
+import usersRepo from './user.repository.js';
 import { User } from './user.model.js';
 import {
   createUser,
