@@ -4,7 +4,7 @@ import { ColumnDTO } from '../columns/column.entity.js';
 import { TaskDTO } from '../tasks/task.entity.js';
 
 @Entity({
-  name: 'Boards',
+  name: 'Board',
 })
 export class BoardDTO {
   @PrimaryGeneratedColumn('uuid')

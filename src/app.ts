@@ -8,6 +8,7 @@ import YAML from 'yamljs';
 import userRouter from './resources/users/user.router.js';
 import boardRouter from './resources/boards/board.router.js';
 import taskRouter from './resources/tasks/task.router.js';
+import loginRouter from './resources/login/login.router.js';
 import {
   accessLogger,
   errorHandler,
@@ -38,6 +39,7 @@ app.use('/', (req, res, next) => {
   next();
 });
 
+app.use('/login', loginRouter);
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 app.use('/boards/:boardId/tasks', taskRouter);

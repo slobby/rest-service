@@ -10,7 +10,7 @@ import { BoardDTO } from '../boards/board.entity.js';
 import { TaskDTO } from '../tasks/task.entity.js';
 
 @Entity({
-  name: 'Columns',
+  name: 'Column',
 })
 export class ColumnDTO {
   @PrimaryGeneratedColumn('uuid')

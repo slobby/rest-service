@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { TaskDTO } from '../tasks/task.entity.js';
 
 @Entity({
-  name: 'Users',
+  name: 'User',
 })
 export class UserDTO {
   @PrimaryGeneratedColumn('uuid')
@@ -23,7 +23,7 @@ export class UserDTO {
 
   @Column({
     type: 'varchar',
-    length: 50,
+    length: 60,
   })
   password: string;
 
