@@ -65,9 +65,10 @@ export const accessLogger = (
   next: express.NextFunction
 ): void => {
   const time = Date.now();
+  const { httpVersion, method, url } = req;
   next();
   finished(res, () => {
-    const { httpVersion, method, url, query, params, body } = req;
+    const { query, params, body } = req;
     const remoteAddr = req.header('x-real-ip') || req.socket.remoteAddress;
     const userAgent = req.header('user-agent');
     const responseTime = Date.now() - time;

@@ -6,3 +6,8 @@ export type loginReqBody = {
 export type loginResBody = {
   token: string;
 };
+
+export type JWTPayload = {
+  id: string;
+  login: string;
+};

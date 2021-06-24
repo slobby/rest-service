@@ -1,11 +1,9 @@
 import { getRepository } from 'typeorm';
-import { hashSync } from 'bcryptjs';
 import { UserDTO } from './user.entity.js';
 import { User } from './user.model.js';
 import { createUser, updateUser } from '../../interfaces/userInterfaces.js';
 import { loginReqBody } from '../../interfaces/loginInterfaces.js';
-
-const hashPassword = (password: string): string => hashSync(password, 10);
+import { hashPassword, validatePassword } from '../../utils';
 
 const getAll = async (): Promise<Array<User>> => {
   const userRepository = getRepository(UserDTO);
@@ -71,12 +69,13 @@ const getByLoginParams = async ({
   password,
 }: loginReqBody): Promise<User | undefined> => {
   const userRepository = getRepository(UserDTO);
-  const findedUserDTO: UserDTO | undefined = await userRepository
+  const findedUserDTO:
+    | UserDTO
+    | undefined = await userRepository
     .createQueryBuilder('User')
     .where('User.login = :login', { login })
-    .andWhere('User.password = :password', { password: hashPassword(password) })
     .getOne();
-  if (findedUserDTO) {
+  if (findedUserDTO && validatePassword(password, findedUserDTO.password)) {
     return new User({ ...findedUserDTO });
   }
   return undefined;

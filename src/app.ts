@@ -15,6 +15,7 @@ import {
   uncaughtExceptionHandler,
   unhandledRejectionHandler,
 } from './loggers/index.js';
+import { isAuthorized } from './midleware/isAuthorized.js';
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
@@ -25,6 +26,7 @@ const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 process.on('uncaughtException', uncaughtExceptionHandler);
 process.on('unhandledRejection', unhandledRejectionHandler);
 app.use(accessLogger);
+app.use(isAuthorized);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -22,8 +22,9 @@ const getJWT = async (
       } else {
         throw new createError.Forbidden();
       }
+    } else {
+      throw new createError.BadRequest('Didn`t receive required parametres.');
     }
-    throw new createError.BadRequest('Didn`t receive required parametres.');
   } catch (error) {
     next(error);
   }
