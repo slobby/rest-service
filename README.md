@@ -9,7 +9,7 @@ This is an Express application, the application implements REST API.
 ## Downloading
 
 ```
-git clone https://github.com/slobby/rest-service.git -b task7
+git clone https://github.com/slobby/rest-service.git -b task8
 ```
 
 ## Installing NPM modules
@@ -53,7 +53,7 @@ npm run test:auth
 To run only one of all test suites (users, boards or tasks)
 
 ```
-npm test <suite name>
+npm test:auth <suite name>
 ```
 
 ### Auto-fix and format
