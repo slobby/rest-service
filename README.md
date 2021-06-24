@@ -44,10 +44,10 @@ For more information about OpenAPI/Swagger please visit https://swagger.io/.
 
 After application running open new terminal and enter:
 
-To run all tests without authorization
+To run all tests with authorization
 
 ```
-npm test
+npm run test:auth
 ```
 
 To run only one of all test suites (users, boards or tasks)
@@ -64,11 +64,11 @@ npm run lint
 
 ### Using Docker
 
-1. git clone https://github.com/slobby/rest-service.git -b task6
+1. git clone https://github.com/slobby/rest-service.git -b task8
 2. run in cmd command
 
 ```
-docker compose -p task7 up
+docker compose -p task8 up
 ```
 
 3. Run in other console all tests.
