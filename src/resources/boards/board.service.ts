@@ -1,4 +1,4 @@
-import boardsRepo from './board.memory.repository.js';
+import boardsRepo from './board.repository.js';
 import { Board } from './board.model.js';
 import {
   updateBoard,

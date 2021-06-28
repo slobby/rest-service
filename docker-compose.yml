@@ -9,7 +9,6 @@ services:
     ports:
       - ${PORT}:${PORT}
     environment:
-      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@postgres:${DB_PORT}/${DB}
       NODE_ENV: ${NODE_ENV}
       PORT: ${PORT}
     command: npm run start
@@ -24,11 +23,11 @@ services:
     image: slobbery/app-database
     restart: always
     ports:
-      - ${DB_PORT}:${DB_PORT}
+      - ${TYPEORM_PORT}:${TYPEORM_PORT}
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB}
+      POSTGRES_USER: ${TYPEORM_USERNAME}
+      POSTGRES_PASSWORD: ${TYPEORM_PASSWORD}
+      POSTGRES_DB: ${TYPEORM_DATABASE}
     volumes:
       - postgresdata:/var/lib/postgresql/data
     networks:
@@ -37,9 +36,6 @@ services:
 networks:
   app-net:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.3.0/24
 
 volumes:
   postgresdata:

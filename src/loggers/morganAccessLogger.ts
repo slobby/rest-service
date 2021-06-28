@@ -1,12 +1,13 @@
 import fs from 'fs';
 import morgan from 'morgan';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
+// import path, { dirname } from 'path';
+// import { fileURLToPath } from 'url';
 import { Request, Response } from 'express';
 import { NODE_ENV, ACCESS_LOG_FILE, LOG_DIR } from '../common/config.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 const SPACE = 2;
 

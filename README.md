@@ -9,7 +9,7 @@ This is an Express application, the application implements REST API.
 ## Downloading
 
 ```
-git clone https://github.com/slobby/rest-service.git -b task6
+git clone https://github.com/slobby/rest-service.git -b task7
 ```
 
 ## Installing NPM modules
@@ -68,13 +68,11 @@ npm run lint
 2. run in cmd command
 
 ```
-docker compose -p task6 up
+docker compose -p task7 up
 ```
 
-3. Make some changes in code file, save and app will reload (look in console)
-4. In app.ts comment 23 line (process.on('uncaughtException', uncaughtExceptionHandler)) \
-   and uncomment 57 line (throw Error('Oops! uncaughtException')). Save and container app-node\
-   will start restarting.
+3. Run in other console all tests.
+4. Run in other console lint check.
 
 ### Debugging in VSCode
 

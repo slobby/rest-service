@@ -17,7 +17,7 @@ const getAll = async (
     const tasks: Array<viewTask> = await tasksService.getAll(boardId);
     res.status(StatusCodes.OK).json(tasks);
   } catch (error) {
-    next(new createError.NotFound('Not found boards.'));
+    next(new createError.NotFound('Not found tasks.'));
   }
 };
 

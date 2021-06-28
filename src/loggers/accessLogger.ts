@@ -1,12 +1,13 @@
 import express from 'express';
 import winston from 'winston';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
+// import path, { dirname } from 'path';
+// import { fileURLToPath } from 'url';
 import { finished } from 'stream';
 import { NODE_ENV, ACCESS_LOG_FILE, LOG_DIR } from '../common/config.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 const SPACE = 4;
 const isProdEnvironment = NODE_ENV === 'production';

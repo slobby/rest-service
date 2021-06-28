@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { createTask, viewTask } from '../../interfaces/taskInterfaces.js';
+import { updateTask, viewTask } from '../../interfaces/taskInterfaces.js';
 import { IModel } from '../../interfaces/interfaces.js';
 
 export class Task implements IModel<viewTask> {
@@ -18,14 +18,15 @@ export class Task implements IModel<viewTask> {
   columnId: string | null;
 
   constructor({
+    id = uuid(),
     title = 'Title',
     order = 0,
     description = 'description',
     userId = null,
     boardId = null,
     columnId = null,
-  }: createTask) {
-    this.id = uuid();
+  }: updateTask) {
+    this.id = id;
     this.title = title;
     this.order = order;
     this.description = description;
