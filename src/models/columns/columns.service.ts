@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreateColumnDto } from './dto/create-column.dto';
-import { UpdateColumnDto } from './dto/update-column.dto';
+import { CreateColumnBoardDto } from './dto/create-column-board.dto';
+import { UpdateColumnBoardDto } from './dto/update-column-board.dto';
 
 @Injectable()
 export class ColumnsService {
-  create(createColumnDto: CreateColumnDto) {
-    return `This action adds a new column ${createColumnDto}`;
+  create(createColumnBoardDto: CreateColumnBoardDto) {
+    return `This action adds a new column ${createColumnBoardDto}`;
   }
 
   findAll() {
@@ -16,7 +16,7 @@ export class ColumnsService {
     return `This action returns a #${id} column`;
   }
 
-  update(id: number, updateColumnDto: UpdateColumnDto) {
+  update(id: number, updateColumnDto: UpdateColumnBoardDto) {
     return `This action updates a #${id} column ${updateColumnDto}`;
   }
 

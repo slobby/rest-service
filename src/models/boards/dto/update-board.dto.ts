@@ -1,4 +1,10 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateBoardDto } from './create-board.dto';
+import { UpdateColumnBoardDto } from 'src/models/columns/dto/update-column-board.dto';
+import { IBoard } from '../interfaces/IBoard';
 
-export class UpdateBoardDto extends PartialType(CreateBoardDto) {}
+export class UpdateBoardDto implements Partial<IBoard> {
+  id?: string;
+
+  title?: string;
+
+  columns?: Array<UpdateColumnBoardDto>;
+}

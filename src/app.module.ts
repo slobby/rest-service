@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { getConnectionOptions } from 'typeorm';
 import { UsersModule } from './models/users/users.module';
+import { BoardsModule } from './models/boards/boards.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UsersModule } from './models/users/users.module';
         }),
     }),
     UsersModule,
+    BoardsModule,
   ],
   controllers: [],
   providers: [],

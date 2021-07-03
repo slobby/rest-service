@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { hashPassword } from 'src/helpers/hashPassword';
-import { validatePassword } from 'src/helpers/validatePassword';
 import { Repository } from 'typeorm';
+import { hashPassword } from '../../helpers/hashPassword';
+import { validatePassword } from '../../helpers/validatePassword';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
@@ -16,9 +16,8 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const user = this.usersRepository.create({
-      name: createUserDto.name,
-      login: createUserDto.login,
+    const user: User = this.usersRepository.create({
+      ...createUserDto,
       password: hashPassword(createUserDto.password),
     });
     return this.usersRepository.save(user);
@@ -29,7 +28,7 @@ export class UsersService {
   }
 
   async getById(id: string): Promise<User | undefined> {
-    return (await this.usersRepository.findByIds([id]))[0];
+    return this.usersRepository.findOne(id);
   }
 
   async update(
