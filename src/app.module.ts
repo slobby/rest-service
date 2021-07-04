@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { getConnectionOptions } from 'typeorm';
 import { UsersModule } from './models/users/users.module';
 import { BoardsModule } from './models/boards/boards.module';
+import { TasksModule } from './models/tasks/tasks.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { BoardsModule } from './models/boards/boards.module';
     }),
     UsersModule,
     BoardsModule,
+    TasksModule,
   ],
   controllers: [],
   providers: [],

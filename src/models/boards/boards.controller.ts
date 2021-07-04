@@ -42,12 +42,20 @@ export class BoardsController {
   async update(
     @Param('id') id: string,
     @Body() updateBoardDto: UpdateBoardDto,
-  ) {
-    return this.boardsService.update(id, updateBoardDto);
+  ): Promise<ViewBoardDto> {
+    const board = await this.boardsService.update(id, updateBoardDto);
+    if (board) {
+      return Board.toResponse(board);
+    }
+    throw new NotFoundException();
   }
 
   @Delete(':id')
-  async deletById(@Param('id') id: string) {
-    return this.boardsService.deletById(id);
+  async deletById(@Param('id') id: string): Promise<ViewBoardDto> {
+    const board = await this.boardsService.deletById(id);
+    if (board) {
+      return Board.toResponse({ ...board, id });
+    }
+    throw new NotFoundException();
   }
 }

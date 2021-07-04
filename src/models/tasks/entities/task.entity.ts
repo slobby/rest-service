@@ -4,6 +4,7 @@ import { Board } from '../../boards/entities/board.entity.js';
 import { User } from '../../users/entities/user.entity';
 import { ColumnBoard } from '../../columns/entities/column-board.entity.js';
 import { ITask } from '../interfaces/ITask.js';
+import { ViewTaskDto } from '../dto/view-task.dto.js';
 
 @Entity({
   name: 'Task',
@@ -47,4 +48,17 @@ export class Task implements ITask {
     eager: true,
   })
   board: Board;
+
+  static toResponse(task: Task): ViewTaskDto {
+    const { id, title, order, description } = task;
+    return {
+      id,
+      title,
+      order,
+      description,
+      userId: task?.user?.id ?? null,
+      boardId: task?.board?.id ?? null,
+      columnId: task?.column?.id ?? null,
+    };
+  }
 }

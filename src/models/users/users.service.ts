@@ -47,10 +47,10 @@ export class UsersService {
   }
 
   async deletById(id: string): Promise<User | undefined> {
-    const findedUser = await this.getById(id);
-    if (findedUser) {
-      await this.usersRepository.remove(findedUser);
-      return findedUser;
+    const user = await this.getById(id);
+    if (user) {
+      await this.usersRepository.remove(user);
+      return user;
     }
     return undefined;
   }

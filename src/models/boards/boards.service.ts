@@ -29,19 +29,19 @@ export class BoardsService {
     id: string,
     updateBoardDto: UpdateBoardDto,
   ): Promise<Board | undefined> {
-    const findedBoard = await this.getById(id);
-    if (findedBoard) {
-      await this.boardsRepository.update(id, { ...updateBoardDto });
+    const board = await this.getById(id);
+    if (board) {
+      await this.boardsRepository.save({ ...board, ...updateBoardDto });
       return this.getById(id);
     }
     return undefined;
   }
 
   async deletById(id: string): Promise<Board | undefined> {
-    const findedBoard = await this.getById(id);
-    if (findedBoard) {
-      await this.boardsRepository.remove(findedBoard);
-      return findedBoard;
+    const board = await this.getById(id);
+    if (board) {
+      await this.boardsRepository.remove(board);
+      return board;
     }
     return undefined;
   }

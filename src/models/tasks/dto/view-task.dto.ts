@@ -1,14 +1,12 @@
-import { IsString, IsInt } from 'class-validator';
 import { ITask } from '../interfaces/ITask';
 
-export class CreateTaskDto implements Omit<ITask, 'id'> {
-  @IsString()
+export class ViewTaskDto implements ITask {
+  id: string;
+
   title: string;
 
-  @IsInt()
   order: number;
 
-  @IsString()
   description: string;
 
   userId: string | null;
