@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import jwt from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { CreateLoginDto } from './dto/create-login.dto';
-import { IEnvironmentVariables } from '../../interfaces/IEnvironmentVariables';
+import { IEnvironmentVariables } from '../../common/interfaces/IEnvironmentVariables';
 import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { IJWTPayload } from './interfaces/IJWTPayload';
