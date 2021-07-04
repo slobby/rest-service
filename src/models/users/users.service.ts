@@ -59,12 +59,12 @@ export class UsersService {
     login,
     password,
   }: Omit<IUser, 'id' | 'name'>): Promise<User | undefined> {
-    const findedUser = await this.usersRepository
+    const user = await this.usersRepository
       .createQueryBuilder('User')
       .where('User.login = :login', { login })
       .getOne();
-    if (findedUser && validatePassword(password, findedUser.password)) {
-      return findedUser;
+    if (user && validatePassword(password, user.password)) {
+      return user;
     }
     return undefined;
   }

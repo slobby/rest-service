@@ -5,6 +5,7 @@ import { getConnectionOptions } from 'typeorm';
 import { UsersModule } from './models/users/users.module';
 import { BoardsModule } from './models/boards/boards.module';
 import { TasksModule } from './models/tasks/tasks.module';
+import { LoginModule } from './models/login/login.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TasksModule } from './models/tasks/tasks.module';
     UsersModule,
     BoardsModule,
     TasksModule,
+    LoginModule,
   ],
   controllers: [],
   providers: [],

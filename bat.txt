@@ -2,3 +2,4 @@
 docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword b262c8b2fb54
 docker compose -p task7 up
 docker compose -p task7 up --force-recreate
+npm run typeorm migration:generate -- -n CreateDataBase
