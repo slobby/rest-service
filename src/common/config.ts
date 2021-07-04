@@ -6,6 +6,17 @@ import path from 'path';
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
 
+declare const process: {
+  env: {
+    PORT: string;
+    NODE_ENV: string;
+    JWT_SECRET_KEY: string;
+    AUTH_MODE: string;
+    ADMIN_LOGIN: string;
+    ADMIN_PASSWORD: string;
+  };
+};
+
 dotenv.config({
   path: path.join(__dirname, '../../.env'),
 });
@@ -17,7 +28,8 @@ export const LOG_DIR = '../../log';
 export const {
   PORT,
   NODE_ENV,
-  MONGO_CONNECTION_STRING,
   JWT_SECRET_KEY,
+  ADMIN_LOGIN,
+  ADMIN_PASSWORD,
 } = process.env;
 export const AUTH_MODE: boolean = process.env['AUTH_MODE'] === 'true';
