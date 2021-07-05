@@ -57,6 +57,7 @@
     "@nestjs/mapped-types": "^0.4.1",
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/platform-fastify": "^7.6.18",
+    "@nestjs/swagger": "^4.8.2",
     "@nestjs/testing": "^7.6.18",
     "@nestjs/typeorm": "^7.1.5",
     "bcryptjs": "^2.4.3",
@@ -64,13 +65,16 @@
     "class-validator": "^0.13.1",
     "cross-env": "^7.0.3",
     "dotenv": "^9.0.0",
+    "fastify-swagger": "^4.8.2",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
+    "swagger-ui-express": "^4.1.6",
     "typeorm": "^0.2.34",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",
@@ -81,6 +85,7 @@
     "@types/jsonwebtoken": "^8.5.3",
     "@types/node": "^14.14.36",
     "@types/supertest": "^2.0.10",
+    "@types/yamljs": "^0.2.31",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
     "chai": "4.3.4",
