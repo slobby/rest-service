@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { hashPassword } from '../../helpers/hashPassword';
-import { validatePassword } from '../../helpers/validatePassword';
+import { hashPassword } from '../../common/helpers/hashPassword';
+import { validatePassword } from '../../common/helpers/validatePassword';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
