@@ -4,10 +4,17 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
+  Inject,
 } from '@nestjs/common';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { Logger } from 'winston';
 
 @Catch()
 export class AllExceptionFilter<T> implements ExceptionFilter {
+  constructor(
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
+  ) {}
+
   catch(exception: T, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
@@ -23,7 +30,6 @@ export class AllExceptionFilter<T> implements ExceptionFilter {
       timestamp: new Date().toISOString(),
       path: request.url,
     });
-    console.log('ERROR');
-    console.log(exception);
+    this.logger.error(exception);
   }
 }

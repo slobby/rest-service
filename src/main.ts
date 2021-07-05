@@ -21,7 +21,7 @@ async function bootstrap() {
 
   app.useGlobalGuards(app.get(AuthGuard));
 
-  app.useGlobalFilters(new AllExceptionFilter());
+  app.useGlobalFilters(app.get(AllExceptionFilter));
 
   const configService =
     app.get<ConfigService<IEnvironmentVariables>>(ConfigService);

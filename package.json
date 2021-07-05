@@ -67,6 +67,7 @@
     "dotenv": "^9.0.0",
     "fastify-swagger": "^4.8.2",
     "jsonwebtoken": "^8.5.1",
+    "nest-winston": "^1.5.0",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
@@ -74,6 +75,7 @@
     "swagger-ui-express": "^4.1.6",
     "typeorm": "^0.2.34",
     "uuid": "^8.3.2",
+    "winston": "^3.3.3",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {

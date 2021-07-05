@@ -9,6 +9,7 @@ import { TasksModule } from './models/tasks/tasks.module';
 import { LoginModule } from './models/login/login.module';
 import { AuthModule } from './common/guards/auth.module';
 import { FilterModule } from './common/filters/filters.module';
+import { LoggerModule } from './common/logger/logger.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { FilterModule } from './common/filters/filters.module';
     BoardsModule,
     TasksModule,
     LoginModule,
+    LoggerModule,
     AuthModule,
     FilterModule,
   ],
