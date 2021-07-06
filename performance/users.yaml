@@ -1,0 +1,16 @@
+config:
+  target: 'http://localhost:4000'
+  plugins:
+    expect: {}
+  phases:
+    - duration: 2
+      arrivalRate: 1
+      rampTo: 1
+      name: 'Users endpoint test' # 50 (5 prs) in 120 sec get/post/apdate
+scenarios:
+  - flow:
+      - post:
+          url: '/login'
+          json:
+            login: 'admin'
+            password: 'admin'
