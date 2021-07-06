@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-// import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { getConnectionOptions } from 'typeorm';
@@ -10,6 +9,7 @@ import { LoginModule } from './models/login/login.module';
 import { AuthModule } from './common/guards/auth.module';
 import { FilterModule } from './common/filters/filters.module';
 import { LoggerModule } from './common/logger/logger.module';
+import { InterceptorsModule } from './common/interceptors/interceptors.module';
 
 @Module({
   imports: [
@@ -31,6 +31,7 @@ import { LoggerModule } from './common/logger/logger.module';
     LoggerModule,
     AuthModule,
     FilterModule,
+    InterceptorsModule,
   ],
   controllers: [],
   providers: [],

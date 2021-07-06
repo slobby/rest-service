@@ -26,7 +26,9 @@ export class BoardsController {
 
   @Get()
   async getAll(): Promise<Array<ViewBoardDto>> {
-    return this.boardsService.getAll();
+    return (await this.boardsService.getAll()).map((element) =>
+      Board.toResponse(element),
+    );
   }
 
   @Get(':id')

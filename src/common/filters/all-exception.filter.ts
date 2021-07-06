@@ -25,11 +25,13 @@ export class AllExceptionFilter<T> implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    response.status(status).json({
-      statusCode: status,
-      timestamp: new Date().toISOString(),
-      path: request.url,
-    });
+    response.status(status).send(
+      JSON.stringify({
+        statusCode: status,
+        timestamp: new Date().toISOString(),
+        path: request.url,
+      }),
+    );
     this.logger.error(exception);
   }
 }

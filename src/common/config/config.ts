@@ -3,14 +3,15 @@ import path from 'path';
 import winston from 'winston';
 
 dotenv.config({
-  path: path.join(__dirname, '../../.env'),
+  path: path.join(__dirname, '../../../.env'),
 });
 
 export const ACCESS_LOG_FILE = 'access.log';
-export const ERROR_LOG_FILE = 'error.log';
+export const ERROR_LOG_FILE = 'log.log';
 export const LOG_DIR = '../../../log';
 
 export const { NODE_ENV } = process.env;
+export const USE_FASTIFY: boolean = process.env['USE_FASTIFY'] === 'true';
 
 const customLevels = {
   levels: {
@@ -38,7 +39,7 @@ const formatter = winston.format.combine(
 
 const prodTransport = new winston.transports.File({
   filename: path.join(__dirname, LOG_DIR, ERROR_LOG_FILE),
-  level: 'error',
+  level: 'info',
   format: formatter,
 });
 

@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
       if (ignoreRouters.some((element: string) => url.startsWith(element))) {
         return true;
       }
-      const authHeader = request.header('Authorization');
+      const authHeader = request.headers['authorization'];
       const JWT_SECRET_KEY = this.configService.get('JWT_SECRET_KEY', 'salt');
       if (authHeader && authHeader.startsWith(authScheme)) {
         const { id, login } = <IJWTPayload>(
