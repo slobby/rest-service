@@ -40,6 +40,14 @@ scenarios:
           url: '/users/{{ userId }}'
           headers:
             Authorization: 'Bearer {{ token }}'
+      - put:
+          url: '/users/{{ userId }}'
+          headers:
+            Authorization: 'Bearer {{ token }}'
+          json:
+            name: '{{ usernames }}{{ $randomString(8) }}'
+            login: '{{ usernames }}{{ $randomString(8) }}'
+            password: '{{ usernames }}{{ $randomString(8) }}'
       - get:
           url: '/users'
           headers:

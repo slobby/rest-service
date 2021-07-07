@@ -12,12 +12,11 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { uncaughtExceptionHandler } from './common/helpers/uncaughtException';
 import { unhandledRejectionHandler } from './common/helpers/unhandledRejection';
 import { getApp } from './common/helpers/getApp';
-import { dbConnect } from './database/dbConnect';
+
+process.on('uncaughtException', uncaughtExceptionHandler);
+process.on('unhandledRejection', unhandledRejectionHandler);
 
 async function bootstrap() {
-  process.on('uncaughtException', uncaughtExceptionHandler);
-  process.on('unhandledRejection', unhandledRejectionHandler);
-
   const app = await getApp();
 
   const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -45,4 +44,6 @@ async function bootstrap() {
   );
 }
 
-dbConnect(bootstrap);
+bootstrap();
+
+// jhgd
