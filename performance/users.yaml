@@ -1,14 +1,14 @@
 config:
   target: 'http://localhost:4000'
   phases:
-    - duration: 120
+    - duration: 10
       arrivalRate: 5
-      rampTo: 50
+      rampTo: 5
       name: 'Warm up'
-#    - duration: 20
-#      arrivalRate: 5
-#      rampTo: 50
-#      name: 'Ramp up load'
+  #    - duration: 20
+  #      arrivalRate: 5
+  #      rampTo: 50
+  #      name: 'Ramp up load'
   payload:
     path: 'users.csv'
     fields:
@@ -28,7 +28,7 @@ scenarios:
           headers:
             Authorization: 'Bearer {{ token }}'
           json:
-            name: '{{ usernames }}'
+            name: '{{ usernames }}{{ $randomString(8) }}'
             login: '{{ usernames }}'
             password: '{{ usernames }}'
           capture:
@@ -43,9 +43,9 @@ scenarios:
           headers:
             Authorization: 'Bearer {{ token }}'
           json:
-            name: '{{ usernames }}1'
-            login: '{{ usernames }}1'
-            password: '{{ usernames }}1'
+            name: '{{ usernames }}{{ $randomString(8) }}'
+            login: '{{ usernames }}{{ $randomString(8) }}'
+            password: '{{ usernames }}{{ $randomString(8) }}'
       - delete:
           url: '/users/{{ userId }}'
           headers:
