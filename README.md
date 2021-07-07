@@ -9,7 +9,7 @@ This is an Express application, the application implements REST API.
 ## Downloading
 
 ```
-git clone https://github.com/slobby/rest-service.git -b task8
+git clone https://github.com/slobby/rest-service.git -b task9
 ```
 
 ## Installing NPM modules
@@ -64,11 +64,11 @@ npm run lint
 
 ### Using Docker
 
-1. git clone https://github.com/slobby/rest-service.git -b task8
+1. git clone https://github.com/slobby/rest-service.git -b task9
 2. run in cmd command
 
 ```
-docker compose -p task8 up
+docker compose -p task9 up
 ```
 
 3. Run in other console all tests.
