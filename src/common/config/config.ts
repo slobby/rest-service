@@ -1,16 +1,28 @@
 import dotenv from 'dotenv';
 import path from 'path';
 import winston from 'winston';
+import {
+  ConsoleTransportInstance,
+  FileTransportInstance,
+} from 'winston/lib/winston/transports';
+
+declare const process: {
+  env: {
+    NODE_ENV: string;
+    RETRY_ATTEMPTS: number;
+    RETRY_DELAY: number;
+    USE_FASTIFY: string;
+  };
+};
 
 dotenv.config({
   path: path.join(__dirname, '../../../.env'),
 });
 
-export const ACCESS_LOG_FILE = 'access.log';
 export const ERROR_LOG_FILE = 'log.log';
 export const LOG_DIR = '../../../log';
 
-export const { NODE_ENV } = process.env;
+export const { NODE_ENV, RETRY_ATTEMPTS, RETRY_DELAY } = process.env;
 export const USE_FASTIFY: boolean = process.env['USE_FASTIFY'] === 'true';
 
 const customLevels = {
@@ -52,7 +64,14 @@ const transport = new winston.transports.Console({
   ),
 });
 
+const transports: Array<ConsoleTransportInstance | FileTransportInstance> = [
+  prodTransport,
+];
+if (NODE_ENV === 'development') {
+  transports.push(transport);
+}
+
 export const errorLoggerOptions = {
   levels: customLevels.levels,
-  transports: [prodTransport, transport],
+  transports,
 };

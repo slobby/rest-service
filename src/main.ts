@@ -12,6 +12,7 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { uncaughtExceptionHandler } from './common/helpers/uncaughtException';
 import { unhandledRejectionHandler } from './common/helpers/unhandledRejection';
 import { getApp } from './common/helpers/getApp';
+import { dbConnect } from './database/dbConnect';
 
 async function bootstrap() {
   process.on('uncaughtException', uncaughtExceptionHandler);
@@ -43,4 +44,5 @@ async function bootstrap() {
     process.stdout.write(`Listening on port ${port}`),
   );
 }
-bootstrap();
+
+dbConnect(bootstrap);

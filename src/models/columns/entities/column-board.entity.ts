@@ -6,8 +6,8 @@ import {
   OneToMany,
   ManyToOne,
 } from 'typeorm';
-import { Task } from 'src/models/tasks/entities/task.entity';
-import { Board } from 'src/models/boards/entities/board.entity';
+import { Task } from '../../tasks/entities/task.entity';
+import { Board } from '../../boards/entities/board.entity';
 import { IColumnBoard } from '../interfaces/IColumnBoard';
 import { ViewColumnBoardDto } from '../dto/view-column-board.dto';
 

@@ -3,3 +3,4 @@ log
 out
 dist
 tsconfig.build.tsbuildinfo
+tsconfig.tsbuildinfo

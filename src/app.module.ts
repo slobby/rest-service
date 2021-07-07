@@ -10,6 +10,7 @@ import { AuthModule } from './common/guards/auth.module';
 import { FilterModule } from './common/filters/filters.module';
 import { LoggerModule } from './common/logger/logger.module';
 import { InterceptorsModule } from './common/interceptors/interceptors.module';
+import { RETRY_ATTEMPTS, RETRY_DELAY } from './common/config/config';
 
 @Module({
   imports: [
@@ -19,9 +20,8 @@ import { InterceptorsModule } from './common/interceptors/interceptors.module';
     TypeOrmModule.forRootAsync({
       useFactory: async () =>
         Object.assign(await getConnectionOptions(), {
-          retryAttempts: 5,
-          retryDelay: 2000,
-          autoLoadEntities: true,
+          retryAttempts: RETRY_ATTEMPTS,
+          retryDelay: RETRY_DELAY,
         }),
     }),
     UsersModule,
