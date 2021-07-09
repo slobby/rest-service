@@ -74,6 +74,23 @@ docker compose -p task9 up
 3. Run in other console all tests.
 4. Run in other console lint check.
 
+### Performance
+
+|Parameter|Express|Fastify|
+|-----------------------|:-------------:|:------:|
+|scenariosCreated            |180|180|
+|scenariosCompleted       |180|180|
+|requestsCompleted        |900|900|
+latency-min                     |3|4|
+latency-max                    |2393|9973|
+latency-median               |755.5|2443|
+latency-p95                     |1882.5|6839.5|
+latency-p99                     |2191.5|8457|
+rps-count                        |900|900|
+rps-mean                         |14.96|12.71|
+errors-ETIMEDOUT          |-|-|
+errors-ECONNREFUSED   | - | - |
+
 ### Debugging in VSCode
 
 Press <kbd>F5</kbd> to debug.
