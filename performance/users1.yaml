@@ -1,0 +1,60 @@
+config:
+  target: 'http://localhost:4000'
+  http:
+    timeout: 20
+  phases:
+    - duration: 60
+      arrivalRate: 25
+      name: 'Warm up'
+  #    - duration: 20
+  #      arrivalRate: 5
+  #      rampTo: 50
+  #      name: 'Ramp up load'
+  payload:
+    path: 'users.csv'
+    fields:
+      - 'usernames'
+before:
+  flow:
+    - log: "Get auth token"
+    - post:
+        url: "/login"
+        json:
+          login: 'admin'
+          password: 'admin'
+        capture:
+          - json: $.token
+            as: token
+scenarios:
+  - flow:
+      - post:
+          url: '/users'
+          headers:
+            Authorization: 'Bearer {{ token }}'
+          json:
+            name: '{{ usernames }}{{ $randomString(8) }}'
+            login: '{{ usernames }}{{ $randomString(8) }}'
+            password: '{{ usernames }}{{ $randomString(8) }}'
+          capture:
+            - json: $.id
+              as: userId
+      - get:
+          url: '/users/{{ userId }}'
+          headers:
+            Authorization: 'Bearer {{ token }}'
+      - put:
+          url: '/users/{{ userId }}'
+          headers:
+            Authorization: 'Bearer {{ token }}'
+          json:
+            name: '{{ usernames }}{{ $randomString(8) }}'
+            login: '{{ usernames }}{{ $randomString(8) }}'
+            password: '{{ usernames }}{{ $randomString(8) }}'
+      - get:
+          url: '/users'
+          headers:
+            Authorization: 'Bearer {{ token }}'
+      - delete:
+          url: '/users/{{ userId }}'
+          headers:
+            Authorization: 'Bearer {{ token }}'

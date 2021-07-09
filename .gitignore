@@ -1,4 +1,6 @@
 node_modules
 log
 out
-build
+dist
+tsconfig.build.tsbuildinfo
+tsconfig.tsbuildinfo
